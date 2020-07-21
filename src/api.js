@@ -25,13 +25,15 @@ export const movieApi = {
 export const tvApi = {
   topRated: () => api.get("tv/top_rated"), // 화살표 함수의 암시적 리턴
 
-  popular: () => api.get("tv/popular"),
+  popular: () => api.get("tv/popular"), //라우터 파라미터들을 개별적으로 설정하는 방식
 
   airingToday: () => api.get("tv/airing_today"),
 
   showDetail: (id) =>
-    api.get(`tv/${id}`, { params: { append_to_response: "videos" } }), //라우터 파라미터들을 개별적으로 설정하는 방식
+    api.get(`tv/${id}`, { params: { append_to_response: "videos" } }), //https://api.themoviedb.org/3/tv/100?api_key=10923b261ba94d897ac6b81148314a3f&language=en-US&append_to_response=videos
 
   search: (term) =>
     api.get("search/tv", { params: { query: encodeURIComponent(term) } }),
 };
+
+// encodeURIComponent는 주소에 쓰는 특수문자 까지 변환한다
