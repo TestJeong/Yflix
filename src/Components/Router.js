@@ -27,4 +27,4 @@ export default () => (
   </Router>
 );
 
-// 기본저그로 Router가 정보를 Router에게 준다 (location, math등)
+// 기본적으로 Router가 정보를 Router에게 준다 (location, math등)

@@ -6,7 +6,7 @@ export default class extends React.Component {
   state = {
     movieResults: null,
     tvResults: null,
-    searchTerm: "Hello",
+    searchTerm: "",
     error: null,
     loading: false, // 디폴트로 아무것도 로딩하지 않지 않을거니까
   };
