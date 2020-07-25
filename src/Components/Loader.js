@@ -12,6 +12,6 @@ const Container = styled.div`
 
 export default () => (
   <Container>
-    <span>🚌</span>
+    <span role="img">🚌</span>
   </Container>
 );

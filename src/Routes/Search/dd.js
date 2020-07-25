@@ -53,8 +53,8 @@ export default class extends React.Component {
 
     return (
       <SearchPresenter
-        movieResults={movieResults}
-        tvResults={tvResults}
+        nowPlaying={movieResults}
+        upcoming={tvResults}
         searchTerm={searchTerm}
         error={error}
         loading={loading}
