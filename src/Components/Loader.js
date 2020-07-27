@@ -12,6 +12,8 @@ const Container = styled.div`
 
 export default () => (
   <Container>
-    <span role="img">🚌</span>
+    <span role="img" aria-label="rating">
+      🚌
+    </span>
   </Container>
 );

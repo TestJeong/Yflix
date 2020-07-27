@@ -25,7 +25,7 @@ export default class extends React.Component {
     } = this.props;
     const { isMovie } = this.state;
     const parsedId = parseInt(id); //문자열을 입력하면 NaN 값이 출력
-    console.log(this.props);
+
     if (isNaN(parsedId)) {
       return push("/"); //NaN이며 push하고 함수를 종료
     }

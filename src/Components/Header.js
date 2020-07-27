@@ -53,3 +53,5 @@ export default withRouter(({ location: { pathname } }) => (
     </List>
   </Header>
 ));
+
+// Link는 a와 비슷한 개념으로 to를 통해 이동할 경로를 지정해준다
