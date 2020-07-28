@@ -15,6 +15,8 @@ export const movieApi = {
 
   popular: () => api.get("movie/popular"),
 
+  movieCredits: (id) => api.get(`movie/${id}/credits`),
+
   movieDetail: (id) =>
     api.get(`movie/${id}`, { params: { append_to_response: "videos" } }),
 
@@ -28,6 +30,8 @@ export const tvApi = {
   popular: () => api.get("tv/popular"), //라우터 파라미터들을 개별적으로 설정하는 방식
 
   airingToday: () => api.get("tv/airing_today"),
+
+  tvCredits: (id) => api.get(`tv/${id}/credits`),
 
   showDetail: (id) =>
     api.get(`tv/${id}`, { params: { append_to_response: "videos" } }), //https://api.themoviedb.org/3/tv/100?api_key=10923b261ba94d897ac6b81148314a3f&language=en-US&append_to_response=videos

@@ -4,10 +4,11 @@ import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import Loader from "../../Components/Loader";
 import Message from "../../Components/Message";
+import Cast from "../../Components/Cast";
 
 const Container = styled.div`
-  height: calc(100vh - 50px);
-  width: 100%;
+  height: calc(100vh);
+  /* width: 100%; */
   position: relative;
   padding: 50px;
 `;
@@ -44,6 +45,7 @@ const Cover = styled.div`
 `;
 
 const Data = styled.div`
+  overflow: auto;
   width: 70%;
   margin-left: 30px;
 `;
@@ -66,10 +68,13 @@ const Divider = styled.span`
 const Overview = styled.p`
   font-size: 16px;
   line-height: 20px;
-  width: 50%;
 `;
 
-const DetailPresenter = ({ result, error, loading }) =>
+const CastContainer = styled.div`
+  margin-top: 50px;
+`;
+
+const DetailPresenter = ({ result, error, loading, credits }) =>
   loading ? (
     <>
       <Helmet>
@@ -115,6 +120,9 @@ const DetailPresenter = ({ result, error, loading }) =>
             </Item>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
+          <CastContainer>
+            <Cast title="CAST">{credits.map((cast) => cast.name)}</Cast>
+          </CastContainer>
         </Data>
       </Content>
     </Container>

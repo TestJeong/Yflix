@@ -9,6 +9,7 @@ export default class extends React.Component {
       location: { pathname },
     } = props;
     this.state = {
+      credits: null,
       result: null,
       error: null,
       loading: true,
@@ -23,30 +24,47 @@ export default class extends React.Component {
       },
       history: { push },
     } = this.props;
+
     const { isMovie } = this.state;
     const parsedId = parseInt(id); //문자열을 입력하면 NaN 값이 출력
 
     if (isNaN(parsedId)) {
       return push("/"); //NaN이며 push하고 함수를 종료
     }
-    let result;
+
     try {
       if (isMovie) {
-        ({ data: result } = await movieApi.movieDetail(parsedId));
+        const { data: result } = await movieApi.movieDetail(parsedId);
+        const {
+          data: { cast: credits },
+        } = await movieApi.movieCredits(parsedId);
+        this.setState({ result, credits });
+        console.log(credits);
       } else {
-        ({ data: result } = await tvApi.showDetail(parsedId));
+        const { data: result } = await tvApi.showDetail(parsedId);
+        const {
+          data: { cast: credits },
+        } = await tvApi.tvCredits(parsedId);
+        this.setState({ result, credits });
+        console.log(credits);
       }
     } catch {
       this.setState({ error: "Can't find anything." });
     } finally {
-      this.setState({ loading: false, result });
+      this.setState({ loading: false });
     }
   }
 
   render() {
-    const { result, error, loading } = this.state;
-    console.log(this.props);
-    return <DetailPresenter result={result} error={error} loading={loading} />;
+    const { result, error, loading, credits } = this.state;
+    return (
+      <DetailPresenter
+        result={result}
+        error={error}
+        loading={loading}
+        credits={credits}
+      />
+    );
   }
 }
 

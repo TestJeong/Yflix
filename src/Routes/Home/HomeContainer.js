@@ -25,6 +25,13 @@ export default class extends React.Component {
       const {
         data: { results: popular }, //변수명 변경방법
       } = await movieApi.popular();
+
+      const {
+        data: { cast },
+      } = await movieApi.movieCredits(27205);
+
+      console.log(cast);
+
       this.setState({ nowPlaying, upcoming, popular });
       //
     } catch {
