@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { Helmet } from "react-helmet";
 import Section from "Components/Section";
 import Loader from "Components/Loader";
 import Message from "Components/Message";
@@ -10,59 +11,68 @@ const Container = styled.div`
   padding: 20px 20px;
 `;
 
-const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) =>
-  loading ? (
-    <Loader />
-  ) : (
-    <Container>
-      {nowPlaying && nowPlaying.length > 0 && (
-        <Section title="Now Playing">
-          {nowPlaying.map((movie) => (
-            <Poster
-              imgageUrl={movie.poster_path}
-              title={movie.title}
-              id={movie.id}
-              isMovie={true}
-              key={movie.key}
-              rating={movie.vote_average}
-              year={movie.release_date.substring(0, 4)}
-            />
-          ))}
-        </Section>
-      )}
-      {upcoming && upcoming.length > 0 && (
-        <Section title="UPComing Movies">
-          {upcoming.map((movie) => (
-            <Poster
-              imgageUrl={movie.poster_path}
-              title={movie.title}
-              id={movie.id}
-              isMovie={true}
-              key={movie.key}
-              rating={movie.vote_average}
-              year={movie.release_date.substring(0, 4)}
-            />
-          ))}
-        </Section>
-      )}
-      {popular && popular.length > 0 && (
-        <Section title="Popular Movies">
-          {popular.map((movie) => (
-            <Poster
-              imgageUrl={movie.poster_path}
-              title={movie.title}
-              id={movie.id}
-              isMovie={true}
-              key={movie.key}
-              rating={movie.vote_average}
-              year={movie.release_date.substring(0, 4)}
-            />
-          ))}
-        </Section>
-      )}
-      {error && <Message text={error} color="#e74c3c" />}
-    </Container>
-  );
+const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => (
+  <>
+    <Helmet>
+      <title>Loading | Nomflix</title>
+    </Helmet>
+    {loading ? (
+      <Loader />
+    ) : (
+      <Container>
+        <Helmet>
+          <title>Movies | Nomflix</title>
+        </Helmet>
+        {nowPlaying && nowPlaying.length > 0 && (
+          <Section title="Now Playing">
+            {nowPlaying.map((movie) => (
+              <Poster
+                imgageUrl={movie.poster_path}
+                title={movie.title}
+                id={movie.id}
+                isMovie={true}
+                key={movie.key}
+                rating={movie.vote_average}
+                year={movie.release_date.substring(0, 4)}
+              />
+            ))}
+          </Section>
+        )}
+        {upcoming && upcoming.length > 0 && (
+          <Section title="UPComing Movies">
+            {upcoming.map((movie) => (
+              <Poster
+                imgageUrl={movie.poster_path}
+                title={movie.title}
+                id={movie.id}
+                isMovie={true}
+                key={movie.key}
+                rating={movie.vote_average}
+                year={movie.release_date.substring(0, 4)}
+              />
+            ))}
+          </Section>
+        )}
+        {popular && popular.length > 0 && (
+          <Section title="Popular Movies">
+            {popular.map((movie) => (
+              <Poster
+                imgageUrl={movie.poster_path}
+                title={movie.title}
+                id={movie.id}
+                isMovie={true}
+                key={movie.key}
+                rating={movie.vote_average}
+                year={movie.release_date.substring(0, 4)}
+              />
+            ))}
+          </Section>
+        )}
+        {error && <Message text={error} color="#e74c3c" />}
+      </Container>
+    )}
+  </>
+);
 
 HomePresenter.propTypes = {
   nowPlaying: PropTypes.array,
