@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Loader from "../../Components/Loader";
 import Message from "../../Components/Message";
 import Cast from "../../Components/Cast";
+import CastProfile from "../../Components/CastProfile";
 
 const Container = styled.div`
   height: calc(100vh);
@@ -121,7 +122,16 @@ const DetailPresenter = ({ result, error, loading, credits }) =>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
           <CastContainer>
-            <Cast title="CAST">{credits.map((cast) => cast.name)}</Cast>
+            <Cast title="CAST">
+              {credits.map((cast) => (
+                <CastProfile
+                  id={cast.id}
+                  char={cast.character}
+                  name={cast.name}
+                  imgUrl={cast.profile_path}
+                />
+              ))}
+            </Cast>
           </CastContainer>
         </Data>
       </Content>

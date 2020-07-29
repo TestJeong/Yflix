@@ -14,12 +14,8 @@ const Grid = styled.span`
   height: 100%;
   font-size: 15px;
   display: flex;
-  overflow: auto;
-  margin-right: 15px;
-  overflow: scroll;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 25px;
+  overflow-x: scroll;
+  overflow-y: hidden;
 `;
 
 const Cast = ({ title, children }) => {
