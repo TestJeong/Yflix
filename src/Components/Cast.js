@@ -14,8 +14,17 @@ const Grid = styled.span`
   height: 100%;
   font-size: 15px;
   display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
 `;
 
 const Cast = ({ title, children }) => {

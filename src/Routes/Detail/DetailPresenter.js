@@ -8,10 +8,10 @@ import Cast from "../../Components/Cast";
 import CastProfile from "../../Components/CastProfile";
 
 const Container = styled.div`
-  height: calc(100vh - 50px);
   width: 100%;
+  height: 80vh;
   position: relative;
-  padding: 70px;
+  padding: 70px 0px;
   @media screen and (max-width: 768px) {
     padding: 0;
   }
@@ -21,14 +21,13 @@ const Backdrop = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 70px);
   position: absolute;
   background-image: url(${(props) => props.bgImage});
   background-position: center center;
   background-size: cover;
   filter: blur(3px);
   opacity: 0.5;
-  z-index: 0;
 `;
 
 const Content = styled.div`
@@ -48,23 +47,11 @@ const Content = styled.div`
 const Cover = styled.div`
   border-radius: 5px;
   min-width: 30%;
-  margin-right: 20px;
+  margin: 0px 20px;
   background-image: url(${(props) => props.bgImage});
   background-position: center center;
   background-size: cover;
-  height: 100%;
-  z-index: 0;
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    margin: auto;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    position: fixed;
-    height: calc(100vh);
-    z-index: -1;
-    opacity: 0.3;
-  }
+  height: auto;
 `;
 
 const Data = styled.div`
@@ -193,12 +180,12 @@ const DetailPresenter = ({ result, error, loading, credits }) =>
             </Cast>
           </CastContainer>
           <VideoContainer>
-            <Cast title="VIDEO">
+            <Cast title="Trailer">
               {result.videos.results.map((i) => (
                 <Video
                   title={i.name}
                   src={`https://www.youtube.com/embed/${i.key}`}
-                ></Video>
+                />
               ))}
             </Cast>
           </VideoContainer>
