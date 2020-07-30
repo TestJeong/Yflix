@@ -14,7 +14,7 @@ const Grid = styled.span`
   height: 100%;
   font-size: 15px;
   display: flex;
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
 `;
 

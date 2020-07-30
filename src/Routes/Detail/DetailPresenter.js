@@ -8,10 +8,13 @@ import Cast from "../../Components/Cast";
 import CastProfile from "../../Components/CastProfile";
 
 const Container = styled.div`
-  height: calc(100vh);
-  /* width: 100%; */
+  height: calc(100vh - 50px);
+  width: 100%;
   position: relative;
-  padding: 50px;
+  padding: 70px;
+  @media screen and (max-width: 768px) {
+    padding: 0;
+  }
 `;
 
 const Backdrop = styled.div`
@@ -34,21 +37,58 @@ const Content = styled.div`
   position: relative;
   z-index: 1;
   height: 100%;
+  border-radius: 5px;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+  }
 `;
 
 const Cover = styled.div`
-  width: 50%;
+  border-radius: 5px;
+  min-width: 30%;
+  margin-right: 20px;
   background-image: url(${(props) => props.bgImage});
   background-position: center center;
   background-size: cover;
   height: 100%;
-  border-radius: 15px;
+  z-index: 0;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    margin: auto;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: calc(100vh);
+    z-index: -1;
+    opacity: 0.3;
+  }
 `;
 
 const Data = styled.div`
+  width: 65%;
+  height: 100%;
   overflow: auto;
-  width: 70%;
-  margin-left: 30px;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  margin-left: 10px;
+  @media screen and (max-width: 768px) {
+    padding-top: 5%;
+    width: 90%;
+    margin-left: 0;
+    margin: 0 auto;
+    overflow: unset;
+  }
 `;
 
 const Title = styled.h2`
@@ -67,12 +107,31 @@ const Divider = styled.span`
 `;
 
 const Overview = styled.p`
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 18px;
+  padding: 5px 0 5px;
+  opacity: 0.7;
+  line-height: 1.5;
+  width: 95%;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    font-size: 14px;
+  }
 `;
 
 const CastContainer = styled.div`
   margin-top: 50px;
+`;
+
+const VideoContainer = styled.div`
+  margin-top: 50px;
+  width: 100%;
+  height: 200px;
+`;
+
+const Video = styled.iframe`
+  margin: 20px;
+  height: 300px;
+  border-radius: 3px;
 `;
 
 const DetailPresenter = ({ result, error, loading, credits }) =>
@@ -133,6 +192,16 @@ const DetailPresenter = ({ result, error, loading, credits }) =>
               ))}
             </Cast>
           </CastContainer>
+          <VideoContainer>
+            <Cast title="VIDEO">
+              {result.videos.results.map((i) => (
+                <Video
+                  title={i.name}
+                  src={`https://www.youtube.com/embed/${i.key}`}
+                ></Video>
+              ))}
+            </Cast>
+          </VideoContainer>
         </Data>
       </Content>
     </Container>

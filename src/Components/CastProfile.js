@@ -22,14 +22,17 @@ const Image = styled.div`
   background-size: cover;
   background-position: center center;
   background-image: url(${(props) => props.bgUrl});
+  border-radius: 3px;
 `;
 
 const Character = styled.span`
+  margin-top: 5px;
   text-align: center;
   display: block;
 `;
 
 const Name = styled.span`
+  margin: 5px;
   text-align: center;
   display: block;
 `;
