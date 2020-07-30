@@ -57,3 +57,4 @@ export default class extends React.Component {
 }
 
 //마운트 되면 nowPlayin 등 찾아서 다 찾으면 state 값을 설정한다
+// 브런치 테스트
