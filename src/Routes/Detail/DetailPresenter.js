@@ -194,15 +194,27 @@ const DetailPresenter = ({ result, error, loading, credits, isMovie }) =>
             >
               Company
             </ButtonLink>
-            <ButtonLink
-              to={{
-                pathname: isMovie
-                  ? `/movie/${result.id}/country/`
-                  : `/show/${result.id}/country/`,
-              }}
-            >
-              Country
-            </ButtonLink>
+            {isMovie ? (
+              <ButtonLink
+                to={{
+                  pathname: isMovie
+                    ? `/movie/${result.id}/country/`
+                    : `/show/${result.id}/country/`,
+                }}
+              >
+                Country
+              </ButtonLink>
+            ) : (
+              <ButtonLink
+                to={{
+                  pathname: isMovie
+                    ? `/movie/${result.id}/country/`
+                    : `/show/${result.id}/country/`,
+                }}
+              >
+                Network
+              </ButtonLink>
+            )}
           </ButtonContainer>
           <Route
             path={isMovie ? "/movie/:id/company" : "/show/:id/company"}
