@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink, Route, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
@@ -6,6 +7,7 @@ import Loader from "../../Components/Loader";
 import Message from "../../Components/Message";
 import Cast from "../../Components/Cast";
 import CastProfile from "../../Components/CastProfile";
+import Company from "../Detail/Company";
 
 const Container = styled.div`
   width: 100%;
@@ -69,13 +71,6 @@ const Data = styled.div`
     background: rgba(255, 255, 255, 0.5);
   }
   margin-left: 10px;
-  @media screen and (max-width: 768px) {
-    padding-top: 5%;
-    width: 90%;
-    margin-left: 0;
-    margin: 0 auto;
-    overflow: unset;
-  }
 `;
 
 const Title = styled.h2`
@@ -99,10 +94,6 @@ const Overview = styled.p`
   opacity: 0.7;
   line-height: 1.5;
   width: 95%;
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    font-size: 14px;
-  }
 `;
 
 const CastContainer = styled.div`
@@ -112,7 +103,7 @@ const CastContainer = styled.div`
 const VideoContainer = styled.div`
   margin-top: 50px;
   width: 100%;
-  height: 200px;
+  height: 420px;
 `;
 
 const Video = styled.iframe`
@@ -121,7 +112,11 @@ const Video = styled.iframe`
   border-radius: 3px;
 `;
 
-const DetailPresenter = ({ result, error, loading, credits }) =>
+const ButtonContainer = styled.div``;
+
+const ButtonLink = styled(NavLink)``;
+
+const DetailPresenter = ({ result, error, loading, credits, isMovie }) =>
   loading ? (
     <>
       <Helmet>
@@ -189,15 +184,50 @@ const DetailPresenter = ({ result, error, loading, credits }) =>
               ))}
             </Cast>
           </VideoContainer>
+          <ButtonContainer>
+            <ButtonLink
+              to={{
+                pathname: isMovie
+                  ? `/movie/${result.id}/company/`
+                  : `/show/${result.id}/company/`,
+              }}
+            >
+              Company
+            </ButtonLink>
+            <ButtonLink
+              to={{
+                pathname: isMovie
+                  ? `/movie/${result.id}/country/`
+                  : `/show/${result.id}/country/`,
+              }}
+            >
+              Country
+            </ButtonLink>
+          </ButtonContainer>
+          <Route
+            path={isMovie ? "/movie/:id/company" : "/show/:id/company"}
+            exact
+            component={Company}
+          />
+          <Redirect
+            from="*"
+            to={
+              isMovie
+                ? `/movie/${result.id}/company/`
+                : `/show/${result.id}/company/`
+            }
+          />
         </Data>
       </Content>
     </Container>
   );
 
-DetailPresenter.prototype = {
+DetailPresenter.protmovie = {
   result: PropTypes.object,
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
 };
 
 export default DetailPresenter;
+
+// Redirect 같은 경우는 route의 path와 같기 때문에 동시에  값을 불러오가 때문에 화면에 Company나 Country 내용이 같이 나온다

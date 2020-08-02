@@ -8,6 +8,7 @@ export default class extends React.Component {
     const {
       location: { pathname },
     } = props;
+    console.log(this.props);
     this.state = {
       credits: null,
       result: null,
@@ -39,14 +40,12 @@ export default class extends React.Component {
           data: { cast: credits },
         } = await movieApi.movieCredits(parsedId);
         this.setState({ result, credits });
-        console.log(credits);
       } else {
         const { data: result } = await tvApi.showDetail(parsedId);
         const {
           data: { cast: credits },
         } = await tvApi.tvCredits(parsedId);
         this.setState({ result, credits });
-        console.log(credits);
       }
     } catch {
       this.setState({ error: "Can't find anything." });
@@ -56,13 +55,14 @@ export default class extends React.Component {
   }
 
   render() {
-    const { result, error, loading, credits } = this.state;
+    const { result, error, loading, credits, isMovie } = this.state;
     return (
       <DetailPresenter
         result={result}
         error={error}
         loading={loading}
         credits={credits}
+        isMovie={isMovie}
       />
     );
   }
