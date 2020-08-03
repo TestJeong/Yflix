@@ -8,7 +8,7 @@ export default class extends React.Component {
     const {
       location: { pathname },
     } = props;
-    console.log(this.props);
+
     this.state = {
       credits: null,
       result: null,

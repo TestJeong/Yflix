@@ -1,5 +1,13 @@
 import React from "react";
 
-const Company = () => {};
+const Company = (props) => {
+  const {
+    match: {
+      params: { id },
+    },
+  } = props;
+  console.log(props);
+  return <div>{id}</div>;
+};
 
-export default () => "Company_test";
+export default Company;

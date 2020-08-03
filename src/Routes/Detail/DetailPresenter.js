@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Route, Redirect } from "react-router-dom";
+import { NavLink, Route, Redirect, Switch } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
@@ -8,6 +8,7 @@ import Message from "../../Components/Message";
 import Cast from "../../Components/Cast";
 import CastProfile from "../../Components/CastProfile";
 import Company from "../Detail/Company";
+import Country from "../Detail/Country";
 
 const Container = styled.div`
   width: 100%;
@@ -112,9 +113,15 @@ const Video = styled.iframe`
   border-radius: 3px;
 `;
 
-const ButtonContainer = styled.div``;
+const ButtonContainer = styled.div`
+  display: flex;
+`;
 
-const ButtonLink = styled(NavLink)``;
+const ButtonLink = styled(NavLink)`
+  padding: 10px 10px;
+  font-size: 25px;
+  display: block;
+`;
 
 const DetailPresenter = ({ result, error, loading, credits, isMovie }) =>
   loading ? (
@@ -185,7 +192,7 @@ const DetailPresenter = ({ result, error, loading, credits, isMovie }) =>
             </Cast>
           </VideoContainer>
           <ButtonContainer>
-            <ButtonLink
+            <ButtonLink // Link와 같이 a같은 개념이므로 클릭시 해당 url로 이동이 되면서 Router에 설정해놓은 url과 같으면 Company 컴포넌트가 실행이된다.
               to={{
                 pathname: isMovie
                   ? `/movie/${result.id}/company/`
@@ -197,9 +204,7 @@ const DetailPresenter = ({ result, error, loading, credits, isMovie }) =>
             {isMovie ? (
               <ButtonLink
                 to={{
-                  pathname: isMovie
-                    ? `/movie/${result.id}/country/`
-                    : `/show/${result.id}/country/`,
+                  pathname: `/movie/${result.id}/country/`,
                 }}
               >
                 Country
@@ -207,28 +212,29 @@ const DetailPresenter = ({ result, error, loading, credits, isMovie }) =>
             ) : (
               <ButtonLink
                 to={{
-                  pathname: isMovie
-                    ? `/movie/${result.id}/country/`
-                    : `/show/${result.id}/country/`,
+                  pathname: `/show/${result.id}/network/`,
                 }}
               >
                 Network
               </ButtonLink>
             )}
           </ButtonContainer>
-          <Route
-            path={isMovie ? "/movie/:id/company" : "/show/:id/company"}
-            exact
-            component={Company}
-          />
-          <Redirect
-            from="*"
-            to={
-              isMovie
-                ? `/movie/${result.id}/company/`
-                : `/show/${result.id}/company/`
-            }
-          />
+          <Switch>
+            <Route
+              path={"/:type/:id/company/"} //해당 url이 요청이 되면 Company 컴포넌트가 실행이 된다. :type :id는 값이 바뀐다는 뜻으로 match => params에 저장이 된다
+              exact
+              component={Company}
+            />
+            <Route path={"/:type/:id/:country"} exact component={Country} />
+            <Redirect
+              from="*"
+              to={
+                isMovie
+                  ? `/movie/${result.id}/company/`
+                  : `/show/${result.id}/company/`
+              }
+            />
+          </Switch>
         </Data>
       </Content>
     </Container>
