@@ -216,6 +216,11 @@ const DetailPresenter = ({ result, error, loading, credits, isMovie }) =>
                 to={{
                   pathname: `/movie/${result.id}/country/`,
                 }}
+                activeStyle={{
+                  background: "rgba(255, 255, 255, 0.5)",
+                  color: "black",
+                  borderBottom: "6px solid yellow",
+                }}
               >
                 Country
               </ButtonLink>
@@ -223,6 +228,11 @@ const DetailPresenter = ({ result, error, loading, credits, isMovie }) =>
               <ButtonLink
                 to={{
                   pathname: `/show/${result.id}/network/`,
+                }}
+                activeStyle={{
+                  background: "rgba(255, 255, 255, 0.5)",
+                  color: "black",
+                  borderBottom: "6px solid yellow",
                 }}
               >
                 Network

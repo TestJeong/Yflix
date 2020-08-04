@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { movieApi, tvApi } from "api";
 import styled from "styled-components";
+import noImage from "../../../assets/noimage.png";
 
 const Box = styled.div`
   background-color: rgba(255, 255, 255, 0.1);
@@ -16,9 +17,9 @@ const Container = styled.div`
 `;
 
 const Image = styled.img`
-  width: 30px;
-  height: 30px;
-  margin: 5px 10px;
+  width: 70px;
+
+  margin: 10px 10px;
 `;
 
 const Company = (props) => {
@@ -35,7 +36,6 @@ const Company = (props) => {
   });
 
   useEffect(() => {
-    console.log("Effect");
     const getCountry = async () => {
       try {
         if (type === "movie") {
@@ -43,7 +43,7 @@ const Company = (props) => {
             data: { production_companies: result },
           } = await movieApi.movieDetail(parsedId);
           setState((pre) => {
-            return { ...pre, result };
+            return { ...pre, result, error, loading: false };
           });
         }
         if (type === "show") {
@@ -51,27 +51,39 @@ const Company = (props) => {
             data: { production_companies: result },
           } = await tvApi.showDetail(parsedId);
           setState((pre) => {
-            return { ...pre, result };
+            return { ...pre, result, error, loading: false };
           });
         }
       } catch (error) {
-        console.log(error);
+        setState((pre) => {
+          return { ...pre, error, loading: false };
+        });
       }
     };
 
     getCountry();
   }, [parsedId, type]);
-  const { result } = state;
+  const { result, error, loading } = state;
 
   return (
     <Box>
-      {result &&
-        result.map((c, index) => (
-          <Container key={index}>
-            <Image src={`https://image.tmdb.org/t/p/original/${c.logo_path}`} />
-            {c.name}
-          </Container>
-        ))}
+      {loading
+        ? null
+        : error
+        ? null
+        : result &&
+          result.map((c, index) => (
+            <Container key={index}>
+              <Image
+                src={
+                  c.logo_path
+                    ? `https://image.tmdb.org/t/p/original/${c.logo_path}`
+                    : noImage
+                }
+              />
+              {c.name}
+            </Container>
+          ))}
     </Box>
   );
 };
