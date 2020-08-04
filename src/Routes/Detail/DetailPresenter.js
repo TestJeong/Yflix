@@ -11,10 +11,9 @@ import Company from "../Detail/Company";
 import Country from "../Detail/Country";
 
 const Container = styled.div`
-  width: 100%;
   height: 80vh;
   position: relative;
-  padding: 70px 0px;
+  padding: 70px 100px;
   @media screen and (max-width: 768px) {
     padding: 0;
   }
@@ -58,7 +57,8 @@ const Cover = styled.div`
 `;
 
 const Data = styled.div`
-  width: 65%;
+  padding: 10px;
+  width: 100%;
   height: 100%;
   overflow: auto;
   -ms-overflow-style: none;
@@ -71,7 +71,6 @@ const Data = styled.div`
   &::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.5);
   }
-  margin-left: 10px;
 `;
 
 const Title = styled.h2`
@@ -102,23 +101,29 @@ const CastContainer = styled.div`
 `;
 
 const VideoContainer = styled.div`
-  margin-top: 50px;
+  display: flex;
+  height: auto;
   width: 100%;
-  height: 420px;
+  margin-top: 50px;
 `;
 
 const Video = styled.iframe`
   margin: 20px;
-  height: 300px;
+  height: 200px;
+  width: 100%;
   border-radius: 3px;
 `;
 
 const ButtonContainer = styled.div`
+  margin-top: 60px;
+  margin-left: 10px;
   display: flex;
 `;
 
 const ButtonLink = styled(NavLink)`
-  padding: 10px 10px;
+  border-radius: 10px 10px 0 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
   font-size: 25px;
   display: block;
 `;
@@ -182,7 +187,7 @@ const DetailPresenter = ({ result, error, loading, credits, isMovie }) =>
             </Cast>
           </CastContainer>
           <VideoContainer>
-            <Cast title="Trailer">
+            <Cast title={"Trailer"}>
               {result.videos.results.map((i) => (
                 <Video
                   title={i.name}
@@ -197,6 +202,11 @@ const DetailPresenter = ({ result, error, loading, credits, isMovie }) =>
                 pathname: isMovie
                   ? `/movie/${result.id}/company/`
                   : `/show/${result.id}/company/`,
+              }}
+              activeStyle={{
+                background: "rgba(255, 255, 255, 0.5)",
+                color: "black",
+                borderBottom: "6px solid yellow",
               }}
             >
               Company

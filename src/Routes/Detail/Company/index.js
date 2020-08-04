@@ -2,10 +2,15 @@ import React, { useState, useEffect } from "react";
 import { movieApi, tvApi } from "api";
 import styled from "styled-components";
 
-const Box = styled.div``;
+const Box = styled.div`
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-left: 10px;
+  width: 100%;
+  padding: 15px 10px;
+`;
 
 const Container = styled.div`
-  margin: 5px 0px;
+  font-size: 20px;
   display: flex;
   align-items: center;
 `;
@@ -13,7 +18,7 @@ const Container = styled.div`
 const Image = styled.img`
   width: 30px;
   height: 30px;
-  margin-right: 20px;
+  margin: 5px 10px;
 `;
 
 const Company = (props) => {
@@ -40,8 +45,14 @@ const Company = (props) => {
           setState((pre) => {
             return { ...pre, result };
           });
-        } else {
-          console.log("this is Show");
+        }
+        if (type === "show") {
+          const {
+            data: { production_companies: result },
+          } = await tvApi.showDetail(parsedId);
+          setState((pre) => {
+            return { ...pre, result };
+          });
         }
       } catch (error) {
         console.log(error);
