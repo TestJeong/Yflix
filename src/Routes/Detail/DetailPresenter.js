@@ -57,7 +57,7 @@ const Cover = styled.div`
 `;
 
 const Data = styled.div`
-  padding: 10px;
+  padding: 20px;
   width: 100%;
   height: 100%;
   overflow: auto;
@@ -240,12 +240,8 @@ const DetailPresenter = ({ result, error, loading, credits, isMovie }) =>
             )}
           </ButtonContainer>
           <Switch>
-            <Route
-              path={"/:type/:id/company/"} //해당 url이 요청이 되면 Company 컴포넌트가 실행이 된다. :type :id는 값이 바뀐다는 뜻으로 match => params에 저장이 된다
-              exact
-              component={Company}
-            />
-            <Route path={"/:type/:id/:country"} exact component={Country} />
+            <Route path={"/:type/:id/company/"} component={Company} />
+            <Route path={"/:type/:id/:country"} component={Country} />
             <Redirect
               from="*"
               to={
@@ -269,3 +265,5 @@ DetailPresenter.protmovie = {
 export default DetailPresenter;
 
 // Redirect 같은 경우는 route의 path와 같기 때문에 동시에  값을 불러오가 때문에 화면에 Company나 Country 내용이 같이 나온다
+
+//Route 부분 -> 해당 url이 요청이 되면 Company 컴포넌트가 실행이 된다. :type :id는 값이 바뀐다는 뜻으로 match => params에 저장이 된다

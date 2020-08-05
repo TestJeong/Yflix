@@ -7,7 +7,7 @@ const Box = styled.div`
   background-color: rgba(255, 255, 255, 0.1);
   margin-left: 10px;
   width: 100%;
-  padding: 15px 10px;
+  padding: 15px 0px;
 `;
 
 const Container = styled.div`
@@ -18,8 +18,7 @@ const Container = styled.div`
 
 const Image = styled.img`
   width: 70px;
-
-  margin: 10px 10px;
+  margin: 10px 30px;
 `;
 
 const Company = (props) => {
