@@ -60,7 +60,7 @@ const Poster = ({ id, imgageUrl, title, rating, year, isMovie = false }) => (
           <span role="img" aria-label="rating">
             ⭐️
           </span>
-          {rating}/10
+          &nbsp;&nbsp;{rating} / 10
         </Rating>
       </ImageContainer>
       <Title>{title}</Title>
