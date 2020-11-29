@@ -9,7 +9,8 @@ const Container = styled.div`
 
 const Image = styled.div`
   background-image: url(${(props) => props.bgUrl});
-  height: 180px;
+  width: 200px;
+  height: 100%;
   background-size: cover;
   border-radius: 4px;
   background-position: center center;
@@ -25,6 +26,8 @@ const Rating = styled.span`
 `;
 
 const ImageContainer = styled.div`
+  margin-right: 40px;
+  height: 250px;
   margin-bottom: 5px;
   position: relative;
   &:hover {

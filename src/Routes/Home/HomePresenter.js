@@ -7,9 +7,15 @@ import Loader from "Components/Loader";
 import Message from "Components/Message";
 import Poster from "Components/Poster";
 
-const Container = styled.div`
-  padding: 20px 20px;
-`;
+const Container = styled.div``;
+
+const settings = {
+  dots: false,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+};
 
 const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => (
   <>
@@ -23,8 +29,9 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => (
         <Helmet>
           <title>Movies | Nomflix</title>
         </Helmet>
+
         {nowPlaying && nowPlaying.length > 0 && (
-          <Section title="Now Playing">
+          <Section title="현재 상영중">
             {nowPlaying.map((movie) => (
               <Poster
                 imgageUrl={movie.poster_path}
@@ -39,7 +46,7 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => (
           </Section>
         )}
         {upcoming && upcoming.length > 0 && (
-          <Section title="UPComing Movies">
+          <Section title="개봉 예정">
             {upcoming.map((movie) => (
               <Poster
                 imgageUrl={movie.poster_path}
@@ -54,7 +61,7 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => (
           </Section>
         )}
         {popular && popular.length > 0 && (
-          <Section title="Popular Movies">
+          <Section title="인기 영화">
             {popular.map((movie) => (
               <Poster
                 imgageUrl={movie.poster_path}
