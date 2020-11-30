@@ -16,7 +16,6 @@ const Container = styled.div`
 const Title = styled.span`
   font-size: 25px;
   font-weight: 700;
-  margin-left: 30px;
 `;
 
 const Grid = styled.div`
@@ -37,21 +36,22 @@ const SlideBtn = styled.button`
   top: 0;
   height: 250px;
   background-color: rgba(0, 0, 0, 0);
-  font-size: 50px;
+  font-size: 30px;
   color: white;
-  font-weight: 700;
+  font-weight: 200;
   z-index: 100;
   cursor: pointer;
   :hover {
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.7);
   }
   @media only screen and (max-width: 420px) {
     display: none;
   }
-  &:after {
-    content: "\f0c3";
-    font-family: FontAwesome;
-  }
+  /* &::after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f066";
+  } */
 `;
 
 const Section = ({ title, children }) => {
@@ -90,7 +90,9 @@ const Section = ({ title, children }) => {
           <FontAwesomeIcon icon={faAngleLeft} />
         </SlideBtn>
         {children}
-        <SlideBtn onClick={rightSliding} direction="right"></SlideBtn>
+        <SlideBtn onClick={rightSliding} direction="right">
+          {<FontAwesomeIcon icon={faAngleRight} />}
+        </SlideBtn>
       </Grid>
     </Container>
   );

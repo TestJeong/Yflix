@@ -6,16 +6,24 @@ import Section from "Components/Section";
 import Loader from "Components/Loader";
 import Message from "Components/Message";
 import Poster from "Components/Poster";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./PowerOf.scss";
+
+/* import {
+  CarouselProvider,
+  Slider,
+  Slide,
+  Image,
+  ButtonBack,
+  ButtonNext,
+} from "pure-react-carousel";
+import "pure-react-carousel/dist/react-carousel.es.css"; */
 
 const Container = styled.div``;
 
-const settings = {
-  dots: false,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-};
+const settings = {};
 
 const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => (
   <>
@@ -29,7 +37,52 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => (
         <Helmet>
           <title>Movies | Nomflix</title>
         </Helmet>
-
+        <Slider {...settings}>
+          <div>
+            <img
+              style={{ width: "100%" }}
+              src="http://placekitten.com/g/400/200"
+            />
+          </div>
+          <div>
+            <img
+              style={{ width: "100%" }}
+              src="http://placekitten.com/g/400/200"
+            />
+          </div>
+          <div>
+            <img
+              style={{ width: "100%" }}
+              src="http://placekitten.com/g/400/200"
+            />
+          </div>
+          <div>
+            <img
+              style={{ width: "100%" }}
+              src="http://placekitten.com/g/400/200"
+            />
+          </div>
+        </Slider>
+        {/* <CarouselProvider
+          visibleSlides={1}
+          totalSlides={3}
+          naturalSlideWidth={100}
+          naturalSlideHeight={50}
+          infinite={true}
+          step={1}
+        >
+          <Slider>
+            <Slide tag="a" index={0}>
+              <Image src="https://lorempixel.com/800/800/cats/0" />
+            </Slide>
+            <Slide tag="a" index={1}>
+              <Image src="https://lorempixel.com/800/800/cats/1" />
+            </Slide>
+            <Slide tag="a" index={2}>
+              <Image src="https://lorempixel.com/800/800/cats/2" />
+            </Slide>
+          </Slider>
+        </CarouselProvider> */}
         {nowPlaying && nowPlaying.length > 0 && (
           <Section title="현재 상영중">
             {nowPlaying.map((movie) => (
@@ -45,6 +98,7 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => (
             ))}
           </Section>
         )}
+
         {upcoming && upcoming.length > 0 && (
           <Section title="개봉 예정">
             {upcoming.map((movie) => (
