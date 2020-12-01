@@ -7,6 +7,7 @@ export default class extends React.Component {
     nowPlaying: null,
     upcoming: null,
     popular: null,
+    movieTrending: null,
     error: null,
     loading: true,
   };
@@ -14,6 +15,10 @@ export default class extends React.Component {
   async componentDidMount() {
     //api를 받아올때까지 기다린다
     try {
+      const {
+        data: { results: movieTrending }, //변수명 변경방법
+      } = await movieApi.movieTrending();
+
       const {
         data: { results: nowPlaying }, //변수명 변경방법
       } = await movieApi.nowPlaying();
@@ -32,7 +37,7 @@ export default class extends React.Component {
 
       console.log(cast);
 
-      this.setState({ nowPlaying, upcoming, popular });
+      this.setState({ nowPlaying, upcoming, popular, movieTrending });
       //
     } catch {
       this.setState({ error: "Can't find movies information." });
@@ -42,13 +47,21 @@ export default class extends React.Component {
   }
 
   render() {
-    const { nowPlaying, upcoming, popular, error, loading } = this.state;
+    const {
+      nowPlaying,
+      upcoming,
+      movieTrending,
+      popular,
+      error,
+      loading,
+    } = this.state;
 
     return (
       <HomePresenter
         nowPlaying={nowPlaying}
         upcoming={upcoming}
         popular={popular}
+        movieTrending={movieTrending}
         error={error}
         loading={loading}
       />

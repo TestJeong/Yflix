@@ -17,6 +17,8 @@ export const movieApi = {
 
   movieCredits: (id) => api.get(`movie/${id}/credits`),
 
+  movieTrending: () => api.get("trending/movie/week"),
+
   movieDetail: (id) =>
     api.get(`movie/${id}`, { params: { append_to_response: "videos" } }),
 

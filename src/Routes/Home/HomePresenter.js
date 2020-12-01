@@ -6,10 +6,7 @@ import Section from "Components/Section";
 import Loader from "Components/Loader";
 import Message from "Components/Message";
 import Poster from "Components/Poster";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "./PowerOf.scss";
+import MovieMainSlider from "../../Components/MovieMainSlider";
 
 /* import {
   CarouselProvider,
@@ -23,8 +20,6 @@ import "pure-react-carousel/dist/react-carousel.es.css"; */
 
 const Container = styled.div``;
 
-const settings = {};
-
 const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => (
   <>
     <Helmet>
@@ -37,32 +32,7 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => (
         <Helmet>
           <title>Movies | Nomflix</title>
         </Helmet>
-        <Slider {...settings}>
-          <div>
-            <img
-              style={{ width: "100%" }}
-              src="http://placekitten.com/g/400/200"
-            />
-          </div>
-          <div>
-            <img
-              style={{ width: "100%" }}
-              src="http://placekitten.com/g/400/200"
-            />
-          </div>
-          <div>
-            <img
-              style={{ width: "100%" }}
-              src="http://placekitten.com/g/400/200"
-            />
-          </div>
-          <div>
-            <img
-              style={{ width: "100%" }}
-              src="http://placekitten.com/g/400/200"
-            />
-          </div>
-        </Slider>
+
         {/* <CarouselProvider
           visibleSlides={1}
           totalSlides={3}
@@ -83,6 +53,7 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => (
             </Slide>
           </Slider>
         </CarouselProvider> */}
+        <MovieMainSlider />
         {nowPlaying && nowPlaying.length > 0 && (
           <Section title="현재 상영중">
             {nowPlaying.map((movie) => (
