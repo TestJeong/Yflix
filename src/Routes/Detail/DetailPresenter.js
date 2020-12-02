@@ -6,6 +6,7 @@ import Loader from "../../Components/Loader";
 import Message from "../../Components/Message";
 import Cast from "../../Components/Cast";
 import CastProfile from "../../Components/CastProfile";
+import Recommend from "../../Components/Recommend";
 
 const Container = styled.div`
   width: 100%;
@@ -121,7 +122,7 @@ const Video = styled.iframe`
   border-radius: 3px;
 `;
 
-const DetailPresenter = ({ result, error, loading, credits }) =>
+const DetailPresenter = ({ result, error, loading, credits, recommend }) =>
   loading ? (
     <>
       <Helmet>
@@ -139,7 +140,6 @@ const DetailPresenter = ({ result, error, loading, credits }) =>
       <Backdrop
         bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}
       />
-
       <Content>
         <Cover
           bgImage={`https://image.tmdb.org/t/p/original${result.poster_path}`}
@@ -191,6 +191,7 @@ const DetailPresenter = ({ result, error, loading, credits }) =>
           </VideoContainer>
         </Data>
       </Content>
+      <Recommend recommend={recommend} />
     </Container>
   );
 

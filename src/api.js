@@ -8,6 +8,8 @@ const api = axios.create({
   },
 });
 
+// movie/{movie_id}/recommendations
+
 export const movieApi = {
   nowPlaying: () => api.get("movie/now_playing"),
 
@@ -16,6 +18,8 @@ export const movieApi = {
   popular: () => api.get("movie/popular"),
 
   movieCredits: (id) => api.get(`movie/${id}/credits`),
+
+  movieRecommend: (id) => api.get(`movie/${id}/recommendations`),
 
   movieTrending: () => api.get("trending/movie/week"),
 
@@ -32,6 +36,10 @@ export const tvApi = {
   popular: () => api.get("tv/popular"), //라우터 파라미터들을 개별적으로 설정하는 방식
 
   airingToday: () => api.get("tv/airing_today"),
+
+  tvRecommend: (id) => api.get(`tv/${id}/recommendations`),
+
+  tvTrending: () => api.get("trending/tv/week"),
 
   tvCredits: (id) => api.get(`tv/${id}/credits`),
 

@@ -13,18 +13,17 @@ export default class extends React.Component {
   };
 
   async componentDidMount() {
-    //api를 받아올때까지 기다린다
     try {
       const {
-        data: { results: movieTrending }, //변수명 변경방법
+        data: { results: movieTrending },
       } = await movieApi.movieTrending();
 
       const {
-        data: { results: nowPlaying }, //변수명 변경방법
+        data: { results: nowPlaying },
       } = await movieApi.nowPlaying();
 
       const {
-        data: { results: upcoming }, //변수명 변경방법
+        data: { results: upcoming },
       } = await movieApi.upcoming();
 
       const {
@@ -55,6 +54,8 @@ export default class extends React.Component {
       error,
       loading,
     } = this.state;
+
+    console.log("movie", movieTrending);
 
     return (
       <HomePresenter

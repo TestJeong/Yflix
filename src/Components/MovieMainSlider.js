@@ -1,26 +1,19 @@
 import React from "react";
+import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../styles/Slider-slick.scss";
+import MainPoster from "./MainPoster";
 
 const settings = {};
 
-const movieMainSlider = () => {
+const movieMainSlider = ({ movieTrending }) => {
   return (
     <Slider {...settings}>
-      <div>
-        <img style={{ width: "100%" }} src="http://placekitten.com/g/400/200" />
-      </div>
-      <div>
-        <img style={{ width: "100%" }} src="http://placekitten.com/g/400/200" />
-      </div>
-      <div>
-        <img style={{ width: "100%" }} src="http://placekitten.com/g/400/200" />
-      </div>
-      <div>
-        <img style={{ width: "100%" }} src="http://placekitten.com/g/400/200" />
-      </div>
+      {movieTrending.map((movie) => (
+        <MainPoster imageUrl={movie.backdrop_path} title={movie.title} />
+      ))}
     </Slider>
   );
 };

@@ -20,7 +20,14 @@ import "pure-react-carousel/dist/react-carousel.es.css"; */
 
 const Container = styled.div``;
 
-const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => (
+const HomePresenter = ({
+  nowPlaying,
+  popular,
+  upcoming,
+  loading,
+  error,
+  movieTrending,
+}) => (
   <>
     <Helmet>
       <title>Loading | Nomflix</title>
@@ -53,7 +60,7 @@ const HomePresenter = ({ nowPlaying, popular, upcoming, loading, error }) => (
             </Slide>
           </Slider>
         </CarouselProvider> */}
-        <MovieMainSlider />
+        <MovieMainSlider movieTrending={movieTrending} />
         {nowPlaying && nowPlaying.length > 0 && (
           <Section title="현재 상영중">
             {nowPlaying.map((movie) => (

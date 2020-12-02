@@ -11,6 +11,7 @@ export default class extends React.Component {
     this.state = {
       credits: null,
       result: null,
+      recommend: null,
       error: null,
       loading: true,
       isMovie: pathname.includes("/movie/"), //includes는 "/moive/"가 포함되어 있으면 true 아님 false를 반환한다
@@ -35,18 +36,28 @@ export default class extends React.Component {
     try {
       if (isMovie) {
         const { data: result } = await movieApi.movieDetail(parsedId);
+
+        const {
+          data: { results: recommend },
+        } = await movieApi.movieRecommend(parsedId);
+
         const {
           data: { cast: credits },
         } = await movieApi.movieCredits(parsedId);
-        this.setState({ result, credits });
-        console.log(credits);
+
+        this.setState({ result, credits, recommend });
       } else {
         const { data: result } = await tvApi.showDetail(parsedId);
+
+        const {
+          data: { results: recommend },
+        } = await tvApi.tvRecommend(parsedId);
+
         const {
           data: { cast: credits },
         } = await tvApi.tvCredits(parsedId);
-        this.setState({ result, credits });
-        console.log(credits);
+
+        this.setState({ result, credits, recommend });
       }
     } catch {
       this.setState({ error: "Can't find anything." });
@@ -56,13 +67,15 @@ export default class extends React.Component {
   }
 
   render() {
-    const { result, error, loading, credits } = this.state;
+    const { result, error, loading, credits, recommend } = this.state;
+
     return (
       <DetailPresenter
         result={result}
         error={error}
         loading={loading}
         credits={credits}
+        recommend={recommend}
       />
     );
   }

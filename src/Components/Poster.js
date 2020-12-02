@@ -40,10 +40,7 @@ const ImageContainer = styled.div`
   }
 `;
 
-const Title = styled.span`
-  display: block;
-  margin-bottom: 3px;
-`;
+
 
 const Year = styled.span`
   font-size: 10px;
