@@ -29,9 +29,9 @@ export default class extends React.Component {
     const { isMovie } = this.state;
     const parsedId = parseInt(id); //문자열을 입력하면 NaN 값이 출력
 
-    if (isNaN(parsedId)) {
+    /* if (isNaN(parsedId)) {
       return push("/"); //NaN이며 push하고 함수를 종료
-    }
+    } */
 
     try {
       if (isMovie) {
@@ -67,7 +67,7 @@ export default class extends React.Component {
   }
 
   render() {
-    const { result, error, loading, credits, recommend } = this.state;
+    const { result, error, loading, credits, recommend, isMovie } = this.state;
 
     return (
       <DetailPresenter
@@ -76,6 +76,7 @@ export default class extends React.Component {
         loading={loading}
         credits={credits}
         recommend={recommend}
+        isMovie={isMovie}
       />
     );
   }

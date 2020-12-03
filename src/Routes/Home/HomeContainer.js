@@ -3,14 +3,22 @@ import HomePresenter from "./HomePresenter";
 import { movieApi } from "api";
 
 export default class extends React.Component {
-  state = {
-    nowPlaying: null,
-    upcoming: null,
-    popular: null,
-    movieTrending: null,
-    error: null,
-    loading: true,
-  };
+  constructor(props) {
+    super(props);
+    const {
+      location: { pathname },
+    } = props;
+
+    this.state = {
+      nowPlaying: null,
+      upcoming: null,
+      popular: null,
+      movieTrending: null,
+      error: null,
+      loading: true,
+    };
+    console.log("pa", props);
+  }
 
   async componentDidMount() {
     try {
@@ -30,14 +38,13 @@ export default class extends React.Component {
         data: { results: popular }, //변수명 변경방법
       } = await movieApi.popular();
 
-      const {
+      /*  const {
         data: { cast },
       } = await movieApi.movieCredits(27205);
 
-      console.log(cast);
+      console.log("aaaa", cast); */
 
       this.setState({ nowPlaying, upcoming, popular, movieTrending });
-      //
     } catch {
       this.setState({ error: "Can't find movies information." });
     } finally {

@@ -40,14 +40,17 @@ const ImageContainer = styled.div`
   }
 `;
 
-
+const Title = styled.span`
+  display: block;
+  margin-bottom: 3px;
+`;
 
 const Year = styled.span`
   font-size: 10px;
   color: rgba(255, 255, 255, 0.5);
 `;
 
-const Poster = ({ id, imgageUrl, title, rating, year, isMovie = false }) => (
+const Poster = ({ id, imgageUrl, title, rating, year, isMovie }) => (
   <Link to={isMovie ? `/movie/${id}` : `/show/${id}`}>
     <Container>
       <ImageContainer>
@@ -64,6 +67,7 @@ const Poster = ({ id, imgageUrl, title, rating, year, isMovie = false }) => (
         </Rating>
       </ImageContainer>
       <Title>{title}</Title>
+
       <Year>{year}</Year>
     </Container>
   </Link>

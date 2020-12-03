@@ -39,27 +39,6 @@ const HomePresenter = ({
         <Helmet>
           <title>Movies | Nomflix</title>
         </Helmet>
-
-        {/* <CarouselProvider
-          visibleSlides={1}
-          totalSlides={3}
-          naturalSlideWidth={100}
-          naturalSlideHeight={50}
-          infinite={true}
-          step={1}
-        >
-          <Slider>
-            <Slide tag="a" index={0}>
-              <Image src="https://lorempixel.com/800/800/cats/0" />
-            </Slide>
-            <Slide tag="a" index={1}>
-              <Image src="https://lorempixel.com/800/800/cats/1" />
-            </Slide>
-            <Slide tag="a" index={2}>
-              <Image src="https://lorempixel.com/800/800/cats/2" />
-            </Slide>
-          </Slider>
-        </CarouselProvider> */}
         <MovieMainSlider movieTrending={movieTrending} />
         {nowPlaying && nowPlaying.length > 0 && (
           <Section title="현재 상영중">

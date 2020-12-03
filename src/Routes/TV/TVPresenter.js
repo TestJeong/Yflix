@@ -6,12 +6,19 @@ import Section from "../../Components/Section";
 import Loader from "../../Components/Loader";
 import Message from "../../Components/Message";
 import Poster from "Components/Poster";
+import MovieMainSlider from "../../Components/MovieMainSlider";
 
-const Container = styled.div`
-  padding: 20px;
-`;
+const Container = styled.div``;
 
-const TVPresenter = ({ topRated, popular, airingToday, loading, error }) =>
+const TVPresenter = ({
+  topRated,
+  popular,
+  airingToday,
+  loading,
+  error,
+  tvTrending,
+  isTV,
+}) =>
   loading ? (
     <Loader />
   ) : (
@@ -19,8 +26,9 @@ const TVPresenter = ({ topRated, popular, airingToday, loading, error }) =>
       <Helmet>
         <title>Show | Nomflix</title>
       </Helmet>
+      <MovieMainSlider tvTrending={tvTrending} isTV={isTV} />
       {topRated && topRated.length > 0 && (
-        <Section title="Top Rated Show">
+        <Section title="최고 평점 TV">
           {topRated.map((show) => (
             <Poster
               imgageUrl={show.poster_path}
@@ -34,7 +42,7 @@ const TVPresenter = ({ topRated, popular, airingToday, loading, error }) =>
         </Section>
       )}
       {popular && popular.length > 0 && (
-        <Section title="Popular Show">
+        <Section title="인기 방송 TV">
           {popular.map((show) => (
             <Poster
               imgageUrl={show.poster_path}
@@ -48,7 +56,7 @@ const TVPresenter = ({ topRated, popular, airingToday, loading, error }) =>
         </Section>
       )}
       {airingToday && airingToday.length > 0 && (
-        <Section title="Airing Today">
+        <Section title="오늘의 방송 TV">
           {airingToday.map((show) => (
             <Poster
               imgageUrl={show.poster_path}

@@ -122,7 +122,14 @@ const Video = styled.iframe`
   border-radius: 3px;
 `;
 
-const DetailPresenter = ({ result, error, loading, credits, recommend }) =>
+const DetailPresenter = ({
+  result,
+  error,
+  loading,
+  credits,
+  recommend,
+  isMovie,
+}) =>
   loading ? (
     <>
       <Helmet>
@@ -191,7 +198,7 @@ const DetailPresenter = ({ result, error, loading, credits, recommend }) =>
           </VideoContainer>
         </Data>
       </Content>
-      <Recommend recommend={recommend} />
+      <Recommend recommend={recommend} isMovie={isMovie} />
     </Container>
   );
 
