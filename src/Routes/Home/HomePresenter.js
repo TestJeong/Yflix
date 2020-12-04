@@ -44,7 +44,7 @@ const HomePresenter = ({
           <Section title="현재 상영중">
             {nowPlaying.map((movie) => (
               <Poster
-                imgageUrl={movie.poster_path}
+                imageUrl={movie.poster_path}
                 title={movie.title}
                 id={movie.id}
                 isMovie={true}
@@ -60,7 +60,7 @@ const HomePresenter = ({
           <Section title="개봉 예정">
             {upcoming.map((movie) => (
               <Poster
-                imgageUrl={movie.poster_path}
+                imageUrl={movie.poster_path}
                 title={movie.title}
                 id={movie.id}
                 isMovie={true}
@@ -75,7 +75,7 @@ const HomePresenter = ({
           <Section title="인기 영화">
             {popular.map((movie) => (
               <Poster
-                imgageUrl={movie.poster_path}
+                imageUrl={movie.poster_path}
                 title={movie.title}
                 id={movie.id}
                 isMovie={true}

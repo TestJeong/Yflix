@@ -7,7 +7,9 @@ export default class extends React.Component {
     super(props);
     const {
       location: { pathname },
+      match,
     } = props;
+    console.log("match", match);
     this.state = {
       credits: null,
       result: null,
@@ -16,6 +18,44 @@ export default class extends React.Component {
       loading: true,
       isMovie: pathname.includes("/movie/"), //includes는 "/moive/"가 포함되어 있으면 true 아님 false를 반환한다
     };
+  }
+  async componentDidUpdate(prevProps) {
+    const { isMovie } = this.state;
+    const urlId = this.props.match.params.id;
+    const prevUrlId = prevProps.match.params.id;
+    if (urlId !== prevUrlId) {
+      try {
+        if (isMovie) {
+          const { data: result } = await movieApi.movieDetail(urlId);
+
+          const {
+            data: { results: recommend },
+          } = await movieApi.movieRecommend(urlId);
+
+          const {
+            data: { cast: credits },
+          } = await movieApi.movieCredits(urlId);
+
+          this.setState({ result, credits, recommend });
+        } else {
+          const { data: result } = await tvApi.showDetail(urlId);
+
+          const {
+            data: { results: recommend },
+          } = await tvApi.tvRecommend(urlId);
+
+          const {
+            data: { cast: credits },
+          } = await tvApi.tvCredits(urlId);
+
+          this.setState({ result, credits, recommend });
+        }
+      } catch {
+        this.setState({ error: "Can't find anything." });
+      } finally {
+        this.setState({ loading: false });
+      }
+    }
   }
 
   async componentDidMount() {

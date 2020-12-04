@@ -31,7 +31,7 @@ const TVPresenter = ({
         <Section title="최고 평점 TV">
           {topRated.map((show) => (
             <Poster
-              imgageUrl={show.poster_path}
+              imageUrl={show.poster_path}
               title={show.name}
               id={show.id}
               key={show.key}
@@ -45,7 +45,7 @@ const TVPresenter = ({
         <Section title="인기 방송 TV">
           {popular.map((show) => (
             <Poster
-              imgageUrl={show.poster_path}
+              imageUrl={show.poster_path}
               title={show.name}
               id={show.id}
               key={show.key}
@@ -59,7 +59,7 @@ const TVPresenter = ({
         <Section title="오늘의 방송 TV">
           {airingToday.map((show) => (
             <Poster
-              imgageUrl={show.poster_path}
+              imageUrl={show.poster_path}
               title={show.name}
               id={show.id}
               key={show.key}

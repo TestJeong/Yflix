@@ -50,14 +50,12 @@ const Year = styled.span`
   color: rgba(255, 255, 255, 0.5);
 `;
 
-const Poster = ({ id, imgageUrl, title, rating, year, isMovie }) => (
-  <Link to={isMovie ? `/movie/${id}` : `/show/${id}`}>
+const Poster = ({ id, imageUrl, title, rating, year, isMovie }) => (
+  <Link to={isMovie ? `/movie/${id}` : `/tv/${id}`}>
     <Container>
       <ImageContainer>
         <Image
-          bgUrl={
-            imgageUrl ? `https://image.tmdb.org/t/p/w300${imgageUrl}` : "no"
-          }
+          bgUrl={imageUrl ? `https://image.tmdb.org/t/p/w300${imageUrl}` : "no"}
         />
         <Rating>
           <span role="img" aria-label="rating">

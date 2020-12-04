@@ -174,6 +174,7 @@ const DetailPresenter = ({
             </Item>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
+
           <CastContainer>
             <Cast title="CAST">
               {credits.map((cast) => (
