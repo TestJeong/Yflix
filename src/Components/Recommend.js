@@ -1,12 +1,12 @@
 import React from "react";
-import reset from "styled-reset";
 import Section from "../Components/Section";
 import Poster from "../Components/Poster";
-import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
-const Recommend = ({ recommend, isMovie }) => {
-  console.log("is", isMovie);
+const Recommend = ({ recommend, isMovie, urlId }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [urlId]);
   return (
     <Section title="추천 영상">
       {recommend.map((movie) => (
@@ -24,5 +24,3 @@ const Recommend = ({ recommend, isMovie }) => {
 };
 
 export default Recommend;
-
-//window.location.replace("/")

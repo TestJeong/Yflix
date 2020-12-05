@@ -2,6 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import Section from "Components/Section";
 import Loader from "Components/Loader";
 import Message from "Components/Message";
@@ -19,6 +22,14 @@ import MovieMainSlider from "../../Components/MovieMainSlider";
 import "pure-react-carousel/dist/react-carousel.es.css"; */
 
 const Container = styled.div``;
+
+const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 7,
+  slidesToScroll: 7,
+};
 
 const HomePresenter = ({
   nowPlaying,
@@ -41,7 +52,7 @@ const HomePresenter = ({
         </Helmet>
         <MovieMainSlider movieTrending={movieTrending} />
         {nowPlaying && nowPlaying.length > 0 && (
-          <Section title="현재 상영중">
+          <Section title={"현재 상영"}>
             {nowPlaying.map((movie) => (
               <Poster
                 imageUrl={movie.poster_path}

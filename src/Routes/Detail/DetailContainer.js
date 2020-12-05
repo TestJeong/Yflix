@@ -11,6 +11,7 @@ export default class extends React.Component {
     } = props;
     console.log("match", match);
     this.state = {
+      urlId: null,
       credits: null,
       result: null,
       recommend: null,
@@ -36,7 +37,7 @@ export default class extends React.Component {
             data: { cast: credits },
           } = await movieApi.movieCredits(urlId);
 
-          this.setState({ result, credits, recommend });
+          this.setState({ result, credits, recommend, urlId });
         } else {
           const { data: result } = await tvApi.showDetail(urlId);
 
@@ -48,7 +49,7 @@ export default class extends React.Component {
             data: { cast: credits },
           } = await tvApi.tvCredits(urlId);
 
-          this.setState({ result, credits, recommend });
+          this.setState({ result, credits, recommend, urlId });
         }
       } catch {
         this.setState({ error: "Can't find anything." });
@@ -66,12 +67,14 @@ export default class extends React.Component {
       history: { push },
     } = this.props;
 
+    const urlId = this.props.match.params.id;
+
     const { isMovie } = this.state;
     const parsedId = parseInt(id); //문자열을 입력하면 NaN 값이 출력
 
-    /* if (isNaN(parsedId)) {
+    if (isNaN(parsedId)) {
       return push("/"); //NaN이며 push하고 함수를 종료
-    } */
+    }
 
     try {
       if (isMovie) {
@@ -85,7 +88,7 @@ export default class extends React.Component {
           data: { cast: credits },
         } = await movieApi.movieCredits(parsedId);
 
-        this.setState({ result, credits, recommend });
+        this.setState({ result, credits, recommend, urlId });
       } else {
         const { data: result } = await tvApi.showDetail(parsedId);
 
@@ -97,7 +100,7 @@ export default class extends React.Component {
           data: { cast: credits },
         } = await tvApi.tvCredits(parsedId);
 
-        this.setState({ result, credits, recommend });
+        this.setState({ result, credits, recommend, urlId });
       }
     } catch {
       this.setState({ error: "Can't find anything." });
@@ -107,7 +110,15 @@ export default class extends React.Component {
   }
 
   render() {
-    const { result, error, loading, credits, recommend, isMovie } = this.state;
+    const {
+      result,
+      error,
+      loading,
+      credits,
+      recommend,
+      isMovie,
+      urlId,
+    } = this.state;
 
     return (
       <DetailPresenter
@@ -117,6 +128,7 @@ export default class extends React.Component {
         credits={credits}
         recommend={recommend}
         isMovie={isMovie}
+        urlId={urlId}
       />
     );
   }

@@ -1,16 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Slider from "react-slick";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 7,
+  slidesToScroll: 7,
+};
 
 const Container = styled.div`
   overflow: hidden;
   margin: 10px 50px;
-  :not(:last-child) {
-    margin-bottom: 50px;
-  }
 `;
 
 const Title = styled.span`
@@ -85,15 +92,7 @@ const Section = ({ title, children }) => {
   return (
     <Container>
       <Title>{title}</Title>
-      <Grid>
-        <SlideBtn onClick={leftSliding}>
-          <FontAwesomeIcon icon={faAngleLeft} />
-        </SlideBtn>
-        {children}
-        <SlideBtn onClick={rightSliding} direction="right">
-          {<FontAwesomeIcon icon={faAngleRight} />}
-        </SlideBtn>
-      </Grid>
+      <Slider {...settings}>{children}</Slider>
     </Container>
   );
 };

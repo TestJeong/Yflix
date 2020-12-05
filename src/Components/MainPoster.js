@@ -47,7 +47,7 @@ const MainPoster = ({ imageUrl, title, rating, isTV, overview, id }) => (
     <Content>
       <Title>{title}</Title>
       <Overview>{overview}</Overview>
-      <Link to={isTV ? `/show/${id}` : `/movie/${id}`}>
+      <Link to={isTV ? `/tv/${id}` : `/movie/${id}`}>
         <Button>더 보기</Button>
       </Link>
     </Content>

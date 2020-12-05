@@ -45,14 +45,12 @@ const Content = styled.div`
   }
 `;
 
-const Cover = styled.div`
+const Cover = styled.img`
   border-radius: 5px;
   min-width: 30%;
   margin: 0px 20px;
-  background-image: url(${(props) => props.bgImage});
-  background-position: center center;
-  background-size: cover;
-  height: auto;
+
+  height: 100%;
 `;
 
 const Data = styled.div`
@@ -113,13 +111,11 @@ const CastContainer = styled.div`
 const VideoContainer = styled.div`
   margin-top: 50px;
   width: 100%;
-  height: 200px;
 `;
 
 const Video = styled.iframe`
-  margin: 20px;
-  height: 300px;
-  border-radius: 3px;
+  margin-right: 40px;
+  border-radius: 10px;
 `;
 
 const DetailPresenter = ({
@@ -129,8 +125,9 @@ const DetailPresenter = ({
   credits,
   recommend,
   isMovie,
-}) =>
-  loading ? (
+  urlId,
+}) => {
+  return loading ? (
     <>
       <Helmet>
         <title>Loading | Nomflix</title>
@@ -149,7 +146,7 @@ const DetailPresenter = ({
       />
       <Content>
         <Cover
-          bgImage={`https://image.tmdb.org/t/p/original${result.poster_path}`}
+          src={`https://image.tmdb.org/t/p/original${result.poster_path}`}
         />
         <Data>
           <Title>{result.title ? result.title : result.name}</Title>
@@ -174,34 +171,37 @@ const DetailPresenter = ({
             </Item>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
-
-          <CastContainer>
-            <Cast title="CAST">
-              {credits.map((cast) => (
-                <CastProfile
-                  id={cast.id}
-                  char={cast.character}
-                  name={cast.name}
-                  imgUrl={cast.profile_path}
-                />
-              ))}
-            </Cast>
-          </CastContainer>
-          <VideoContainer>
-            <Cast title="Trailer">
-              {result.videos.results.map((i) => (
-                <Video
-                  title={i.name}
-                  src={`https://www.youtube.com/embed/${i.key}`}
-                />
-              ))}
-            </Cast>
-          </VideoContainer>
         </Data>
       </Content>
-      <Recommend recommend={recommend} isMovie={isMovie} />
+
+      <VideoContainer>
+        <Cast title="Trailer">
+          {result.videos.results.map((i) => (
+            <Video
+              title={i.name}
+              src={`https://www.youtube.com/embed/${i.key}`}
+            />
+          ))}
+        </Cast>
+      </VideoContainer>
+
+      <CastContainer>
+        <Cast title="CAST">
+          {credits.map((cast) => (
+            <CastProfile
+              id={cast.id}
+              char={cast.character}
+              name={cast.name}
+              imgUrl={cast.profile_path}
+            />
+          ))}
+        </Cast>
+      </CastContainer>
+
+      <Recommend recommend={recommend} isMovie={isMovie} urlId={urlId} />
     </Container>
   );
+};
 
 DetailPresenter.prototype = {
   result: PropTypes.object,

@@ -5,16 +5,14 @@ import styled from "styled-components";
 
 const Container = styled.div`
   font-size: 12px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 `;
 
-const Image = styled.div`
-  background-image: url(${(props) => props.bgUrl});
-  width: 200px;
+const Image = styled.img`
   height: 100%;
-  background-size: cover;
-  border-radius: 4px;
-  background-position: center center;
-  transition: opacity 0.1s linear;
+  border-radius: 10px;
 `;
 
 const Rating = styled.span`
@@ -26,10 +24,11 @@ const Rating = styled.span`
 `;
 
 const ImageContainer = styled.div`
-  margin-right: 40px;
   height: 250px;
   margin-bottom: 5px;
+
   position: relative;
+  justify-content: center;
   &:hover {
     ${Image} {
       opacity: 0.3;
@@ -40,8 +39,13 @@ const ImageContainer = styled.div`
   }
 `;
 
+const Content = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 const Title = styled.span`
-  display: block;
+  position: block;
   margin-bottom: 3px;
 `;
 
@@ -55,7 +59,7 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie }) => (
     <Container>
       <ImageContainer>
         <Image
-          bgUrl={imageUrl ? `https://image.tmdb.org/t/p/w300${imageUrl}` : "no"}
+          src={imageUrl ? `https://image.tmdb.org/t/p/w500${imageUrl}` : "no"}
         />
         <Rating>
           <span role="img" aria-label="rating">
@@ -64,8 +68,8 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie }) => (
           &nbsp;&nbsp;{rating} / 10
         </Rating>
       </ImageContainer>
-      <Title>{title}</Title>
 
+      <Title>{title}</Title>
       <Year>{year}</Year>
     </Container>
   </Link>
