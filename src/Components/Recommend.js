@@ -8,7 +8,7 @@ const Recommend = ({ recommend, isMovie, urlId }) => {
     window.scrollTo(0, 0);
   }, [urlId]);
   return (
-    <Section title="추천 영상">
+    <Section title="추천 영상" recommend={recommend}>
       {recommend.map((movie) => (
         <Poster
           imageUrl={movie.poster_path}

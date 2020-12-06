@@ -5,7 +5,11 @@ import "slick-carousel/slick/slick-theme.css";
 import "../styles/Slider-slick.scss";
 import MainPoster from "./MainPoster";
 
-const settings = {};
+const settings = {
+  autoplay: true,
+  autoplaySpeed: 3000,
+  arrows: false,
+};
 
 const movieMainSlider = ({ movieTrending, tvTrending, isTV }) => {
   return isTV ? (

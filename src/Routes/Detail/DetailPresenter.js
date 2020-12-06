@@ -7,6 +7,7 @@ import Message from "../../Components/Message";
 import Cast from "../../Components/Cast";
 import CastProfile from "../../Components/CastProfile";
 import Recommend from "../../Components/Recommend";
+import reset from "styled-reset";
 
 const Container = styled.div`
   width: 100%;
@@ -14,7 +15,8 @@ const Container = styled.div`
   position: relative;
   padding: 70px 0px;
   @media screen and (max-width: 768px) {
-    padding: 0;
+    display: flex;
+    flex-direction: column;
   }
 `;
 
@@ -118,6 +120,8 @@ const Video = styled.iframe`
   margin: 30px 40px 30px 0px;
 `;
 
+const SubContent = styled.div``;
+
 const DetailPresenter = ({
   result,
   error,
@@ -172,28 +176,33 @@ const DetailPresenter = ({
           </ItemContainer>
           <Overview>{result.overview}</Overview>
           <VideoContainer>
-            <Cast title="Trailer">
-              {result.videos.results.map((i) => (
-                <Video
-                  title={i.name}
-                  src={`https://www.youtube.com/embed/${i.key}`}
-                />
-              ))}
-            </Cast>
+            {result.videos.length === 0 ? (
+              <Cast title="Trailer">
+                {result.videos.results.map((i) => (
+                  <Video
+                    title={i.name}
+                    src={`https://www.youtube.com/embed/${i.key}`}
+                  />
+                ))}
+              </Cast>
+            ) : null}
           </VideoContainer>
 
           <CastContainer>
-            <Cast title="CAST">
-              {credits.map((cast) => (
-                <CastProfile
-                  id={cast.id}
-                  char={cast.character}
-                  name={cast.name}
-                  imgUrl={cast.profile_path}
-                />
-              ))}
-            </Cast>
+            {credits.length === 0 ? null : (
+              <Cast title="CAST">
+                {credits.map((cast) => (
+                  <CastProfile
+                    id={cast.id}
+                    char={cast.character}
+                    name={cast.name}
+                    imgUrl={cast.profile_path}
+                  />
+                ))}
+              </Cast>
+            )}
           </CastContainer>
+          <div>{console.log(result)}</div>
         </Data>
       </Content>
 

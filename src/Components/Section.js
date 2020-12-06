@@ -4,10 +4,10 @@ import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "../styles/Slider-slick.scss";
 
 const settings = {
-  dots: true,
-  infinite: true,
+  infinite: false,
   speed: 500,
   slidesToShow: 7,
   slidesToScroll: 7,
@@ -77,10 +77,11 @@ const Title = styled.div`
   font-weight: 700;
 `;
 
-const Section = ({ title, children }) => {
+const Section = ({ title, children, recommend }) => {
   return (
     <Container>
       <Title>{title}</Title>
+
       <Slider {...settings}>{children}</Slider>
     </Container>
   );
