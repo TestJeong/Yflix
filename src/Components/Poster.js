@@ -39,11 +39,6 @@ const ImageContainer = styled.div`
   }
 `;
 
-const Content = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
 const Title = styled.span`
   position: block;
   margin-bottom: 3px;

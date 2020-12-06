@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
+  margin: 30px 10px 30px 0px;
   font-size: 12px;
   a {
     color: inherit;
@@ -18,11 +19,12 @@ const ImageContainer = styled.div``;
 const Image = styled.div`
   margin: 0 10px;
   width: 80px;
-  height: 70px;
+  height: 80px;
   background-size: cover;
   background-position: center center;
   background-image: url(${(props) => props.bgUrl});
-  border-radius: 3px;
+  border-radius: 50%;
+  border: 2px solid white;
 `;
 
 const Character = styled.span`

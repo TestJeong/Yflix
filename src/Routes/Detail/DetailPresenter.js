@@ -114,8 +114,8 @@ const VideoContainer = styled.div`
 `;
 
 const Video = styled.iframe`
-  margin-right: 40px;
   border-radius: 10px;
+  margin: 30px 40px 30px 0px;
 `;
 
 const DetailPresenter = ({
@@ -171,32 +171,31 @@ const DetailPresenter = ({
             </Item>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
+          <VideoContainer>
+            <Cast title="Trailer">
+              {result.videos.results.map((i) => (
+                <Video
+                  title={i.name}
+                  src={`https://www.youtube.com/embed/${i.key}`}
+                />
+              ))}
+            </Cast>
+          </VideoContainer>
+
+          <CastContainer>
+            <Cast title="CAST">
+              {credits.map((cast) => (
+                <CastProfile
+                  id={cast.id}
+                  char={cast.character}
+                  name={cast.name}
+                  imgUrl={cast.profile_path}
+                />
+              ))}
+            </Cast>
+          </CastContainer>
         </Data>
       </Content>
-
-      <VideoContainer>
-        <Cast title="Trailer">
-          {result.videos.results.map((i) => (
-            <Video
-              title={i.name}
-              src={`https://www.youtube.com/embed/${i.key}`}
-            />
-          ))}
-        </Cast>
-      </VideoContainer>
-
-      <CastContainer>
-        <Cast title="CAST">
-          {credits.map((cast) => (
-            <CastProfile
-              id={cast.id}
-              char={cast.character}
-              name={cast.name}
-              imgUrl={cast.profile_path}
-            />
-          ))}
-        </Cast>
-      </CastContainer>
 
       <Recommend recommend={recommend} isMovie={isMovie} urlId={urlId} />
     </Container>

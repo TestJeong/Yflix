@@ -17,6 +17,11 @@ const Recommend = ({ recommend, isMovie, urlId }) => {
           isMovie={isMovie}
           key={movie.key}
           rating={movie.vote_average}
+          year={
+            movie.release_date
+              ? movie.release_date.substring(0, 4)
+              : movie.first_air_date.substring(0, 4)
+          }
         />
       ))}
     </Section>
