@@ -7,7 +7,7 @@ import Message from "../../Components/Message";
 import Cast from "../../Components/Cast";
 import CastProfile from "../../Components/CastProfile";
 import Recommend from "../../Components/Recommend";
-import reset from "styled-reset";
+import Seasons from "../../Components/Season";
 
 const Container = styled.div`
   width: 100%;
@@ -24,7 +24,7 @@ const Backdrop = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 130px);
   position: absolute;
   background-image: url(${(props) => props.bgImage});
   background-position: center center;
@@ -51,7 +51,6 @@ const Cover = styled.img`
   border-radius: 5px;
   min-width: 30%;
   margin: 0px 20px;
-
   height: 100%;
 `;
 
@@ -80,8 +79,9 @@ const Data = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 32px;
+  font-size: 36px;
   margin-bottom: 20px;
+  font-weight: 700;
 `;
 
 const ItemContainer = styled.div`
@@ -115,12 +115,25 @@ const VideoContainer = styled.div`
   width: 100%;
 `;
 
+const SeasonsContainer = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
+const CompanyContainer = styled.div`
+  margin-top: 50px;
+`;
+
 const Video = styled.iframe`
   border-radius: 10px;
   margin: 30px 40px 30px 0px;
 `;
 
-const SubContent = styled.div``;
+const SeasonTitle = styled.div`
+  margin: 20px 0px;
+  font-size: 20px;
+  font-weight: 700;
+`;
 
 const DetailPresenter = ({
   result,
@@ -131,6 +144,7 @@ const DetailPresenter = ({
   isMovie,
   urlId,
 }) => {
+  console.log("res", result);
   return loading ? (
     <>
       <Helmet>
@@ -141,73 +155,103 @@ const DetailPresenter = ({
   ) : error ? (
     <Message text={error} color="#e74c3c" />
   ) : (
-    <Container>
-      <Helmet>
-        <title>{result.title ? result.title : result.name}</title>
-      </Helmet>
-      <Backdrop
-        bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}
-      />
-      <Content>
-        <Cover
-          src={`https://image.tmdb.org/t/p/original${result.poster_path}`}
+    <>
+      <Container>
+        <Helmet>
+          <title>{result.title ? result.title : result.name}</title>
+        </Helmet>
+        <Backdrop
+          bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}
         />
-        <Data>
-          <Title>{result.title ? result.title : result.name}</Title>
-          <ItemContainer>
-            <Item>
-              {result.release_date
-                ? result.release_date.substring(0, 4)
-                : result.first_air_date.substring(0, 4)}
-            </Item>
-            <Divider>•</Divider>
-            <Item>
-              {result.runtime ? result.runtime : result.episode_run_time[0]} 분
-            </Item>
-            <Divider>•</Divider>
-            <Item>
-              {result.genres.map(
-                (genre, index) =>
-                  index === result.genres.length - 1
-                    ? genre.name
-                    : `${genre.name} / ` // map은 배열 하나하나를 적용시킨다
-              )}
-            </Item>
-          </ItemContainer>
-          <Overview>{result.overview}</Overview>
-          <VideoContainer>
-            {result.videos.length === 0 ? (
-              <Cast title="Trailer">
-                {result.videos.results.map((i) => (
-                  <Video
-                    title={i.name}
-                    src={`https://www.youtube.com/embed/${i.key}`}
-                  />
-                ))}
-              </Cast>
-            ) : null}
-          </VideoContainer>
-
-          <CastContainer>
-            {credits.length === 0 ? null : (
-              <Cast title="CAST">
-                {credits.map((cast) => (
-                  <CastProfile
-                    id={cast.id}
-                    char={cast.character}
-                    name={cast.name}
-                    imgUrl={cast.profile_path}
-                  />
-                ))}
-              </Cast>
+        <Content>
+          <Cover
+            src={`https://image.tmdb.org/t/p/original${result.poster_path}`}
+          />
+          <Data>
+            <Title>{result.title ? result.title : result.name}</Title>
+            <ItemContainer>
+              <Item>
+                {result.release_date
+                  ? result.release_date.substring(0, 4)
+                  : result.first_air_date.substring(0, 4)}
+              </Item>
+              <Divider>•</Divider>
+              <Item>
+                {result.runtime ? result.runtime : result.episode_run_time} 분
+              </Item>
+              <Divider>•</Divider>
+              <Item>
+                {result.genres.map(
+                  (genre, index) =>
+                    index === result.genres.length - 1
+                      ? genre.name
+                      : `${genre.name} / ` // map은 배열 하나하나를 적용시킨다
+                )}
+              </Item>
+            </ItemContainer>
+            <Overview>{result.overview}</Overview>
+            {result.videos.results == 0 ? null : (
+              <VideoContainer>
+                {
+                  <Cast title="Trailer">
+                    {result.videos.results.map((i) => (
+                      <Video
+                        title={i.name}
+                        src={`https://www.youtube.com/embed/${i.key}`}
+                      />
+                    ))}
+                  </Cast>
+                }
+              </VideoContainer>
             )}
-          </CastContainer>
-          <div>{console.log(result)}</div>
-        </Data>
-      </Content>
+            <CastContainer>
+              {credits.length === 0 ? null : (
+                <Cast title="CAST">
+                  {credits.map((cast) => (
+                    <CastProfile
+                      id={cast.id}
+                      char={cast.character}
+                      name={cast.name}
+                      imgUrl={cast.profile_path}
+                    />
+                  ))}
+                </Cast>
+              )}
+            </CastContainer>
 
+            {result.production_companies == 0 ? null : (
+              <CompanyContainer>
+                <Cast title="제작사">
+                  {result.production_companies.map((company) => (
+                    <CastProfile
+                      name={company.name}
+                      imgUrl={company.logo_path}
+                      origin_country={company.origin_country}
+                    />
+                  ))}
+                </Cast>
+              </CompanyContainer>
+            )}
+
+            {isMovie ? null : (
+              <>
+                <SeasonTitle>시즌 정보</SeasonTitle>
+                <SeasonsContainer>
+                  {result.seasons.map((season) => (
+                    <Seasons
+                      imgUrl={season.poster_path}
+                      name={season.name}
+                      episode_count={season.episode_count}
+                    />
+                  ))}
+                </SeasonsContainer>
+              </>
+            )}
+          </Data>
+        </Content>
+      </Container>
       <Recommend recommend={recommend} isMovie={isMovie} urlId={urlId} />
-    </Container>
+    </>
   );
 };
 

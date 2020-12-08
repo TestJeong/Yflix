@@ -18,8 +18,8 @@ const ImageContainer = styled.div``;
 
 const Image = styled.div`
   margin: 0 10px;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   background-size: cover;
   background-position: center center;
   background-image: url(${(props) => props.bgUrl});
@@ -39,7 +39,13 @@ const Name = styled.span`
   display: block;
 `;
 
-const CastProfile = ({ id, char, name, imgUrl }) => {
+const Country = styled.span`
+  margin: 5px;
+  text-align: center;
+  display: block;
+`;
+
+const CastProfile = ({ id, char, name, imgUrl, origin_country }) => {
   return (
     <Link to={`/person/${id}/`}>
       <Container>
@@ -52,6 +58,7 @@ const CastProfile = ({ id, char, name, imgUrl }) => {
         <Name>
           {name && name.length > 10 ? name.substring(0, 10) + "..." : name}
         </Name>
+        <Country>{origin_country}</Country>
       </Container>
     </Link>
   );

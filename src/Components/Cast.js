@@ -6,6 +6,7 @@ const Container = styled.div``;
 
 const Title = styled.h3`
   font-size: 20px;
+  font-weight: 700;
 `;
 
 const Grid = styled.span`
