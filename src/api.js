@@ -26,8 +26,7 @@ export const movieApi = {
   movieDetail: (id) =>
     api.get(`movie/${id}`, { params: { append_to_response: "videos" } }),
 
-  search: (term) =>
-    api.get("search/movie", { params: { query: encodeURIComponent(term) } }), //https://api.themoviedb.org/3/search/movie?api_key=10923b261ba94d897ac6b81148314a3f&language=en-US&query=hey&page=1&include_adult=false
+  search: (term) => api.get("search/movie", { params: { query: term } }), //https://api.themoviedb.org/3/search/movie?api_key=10923b261ba94d897ac6b81148314a3f&language=en-US&query=hey&page=1&include_adult=false
 };
 
 export const tvApi = {
@@ -46,8 +45,7 @@ export const tvApi = {
   showDetail: (id) =>
     api.get(`tv/${id}`, { params: { append_to_response: "videos" } }), //https://api.themoviedb.org/3/tv/100?api_key=10923b261ba94d897ac6b81148314a3f&language=en-US&append_to_response=videos
 
-  search: (term) =>
-    api.get("search/tv", { params: { query: encodeURIComponent(term) } }),
+  search: (term) => api.get("search/tv", { params: { query: term } }),
 };
 
 // encodeURIComponent는 주소에 쓰는 특수문자 까지 변환한다

@@ -12,6 +12,7 @@ const Container = styled.div`
 `;
 
 const Form = styled.form`
+  margin-top: 20px;
   margin-bottom: 50px;
   width: 100%;
 `;
@@ -37,7 +38,7 @@ const SearchPresenter = ({
     </Helmet>
     <Form onSubmit={handleSubmit}>
       <Input
-        placeholder="Search Movies or TV Shows..."
+        placeholder="어떤 작품을 찾으시나요?"
         value={searchTerm}
         onChange={updateTerm}
       />
@@ -47,10 +48,10 @@ const SearchPresenter = ({
     ) : (
       <>
         {movieResults && movieResults.length > 0 && (
-          <Section title="Movie Results">
+          <Section title="영화">
             {movieResults.map((movie) => (
               <Poster
-                imgageUrl={movie.poster_path}
+                imageUrl={movie.poster_path}
                 title={movie.title}
                 id={movie.id}
                 isMovie={true}
@@ -62,10 +63,10 @@ const SearchPresenter = ({
           </Section>
         )}
         {tvResults && tvResults.length > 0 && (
-          <Section title="TV Show Results">
+          <Section title="TV프로그램">
             {tvResults.map((show) => (
               <Poster
-                imgageUrl={show.poster_path}
+                imageUrl={show.poster_path}
                 title={show.name}
                 id={show.id}
                 key={show.key}

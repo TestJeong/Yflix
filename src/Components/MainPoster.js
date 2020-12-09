@@ -46,7 +46,9 @@ const MainPoster = ({ imageUrl, title, rating, isTV, overview, id }) => (
     <Backdrop bgImage={`https://image.tmdb.org/t/p/original${imageUrl}`} />
     <Content>
       <Title>{title}</Title>
-      <Overview>{overview}</Overview>
+      <Overview>
+        {overview.length > 300 ? overview.substring(0, 300) + "..." : overview}
+      </Overview>
       <Link to={isTV ? `/tv/${id}` : `/movie/${id}`}>
         <Button>더 보기</Button>
       </Link>
