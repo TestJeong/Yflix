@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -37,6 +38,12 @@ const movieMainSlider = ({ movieTrending, tvTrending, isTV }) => {
       ))}
     </Slider>
   );
+};
+
+movieMainSlider.propTypes = {
+  movieTrending: PropTypes.array,
+  tvTrending: PropTypes.array,
+  isTV: PropTypes.bool,
 };
 
 export default movieMainSlider;

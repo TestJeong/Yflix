@@ -86,6 +86,7 @@ HomePresenter.propTypes = {
   nowPlaying: PropTypes.array,
   popular: PropTypes.array,
   upcomfing: PropTypes.array,
+  movieTrending: PropTypes.array,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.string,
 };

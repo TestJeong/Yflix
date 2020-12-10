@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -41,7 +42,7 @@ const Button = styled.button`
   border: 0;
 `;
 
-const MainPoster = ({ imageUrl, title, rating, isTV, overview, id }) => (
+const MainPoster = ({ imageUrl, title, isTV, overview, id }) => (
   <Conatiner>
     <Backdrop bgImage={`https://image.tmdb.org/t/p/original${imageUrl}`} />
     <Content>
@@ -55,5 +56,13 @@ const MainPoster = ({ imageUrl, title, rating, isTV, overview, id }) => (
     </Content>
   </Conatiner>
 );
+
+MainPoster.propTypes = {
+  imageUrl: PropTypes.string,
+  title: PropTypes.string,
+  isTV: PropTypes.bool,
+  overview: PropTypes.string,
+  id: PropTypes.number,
+};
 
 export default MainPoster;
