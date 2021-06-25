@@ -45,7 +45,15 @@ const Country = styled.span`
   display: block;
 `;
 
-const CastProfile = ({ id, char, name, imgUrl, origin_country }) => {
+type GreetingsProps = {
+  id: string;
+  char: string;
+  name: string;
+  imgUrl: string;
+  origin_country: string;
+};
+
+const CastProfile: React.FC<GreetingsProps> = ({ id, char, name, imgUrl, origin_country }) => {
   return (
     <Link to={`/person/${id}/`}>
       <Container>
@@ -64,11 +72,6 @@ const CastProfile = ({ id, char, name, imgUrl, origin_country }) => {
   );
 };
 
-CastProfile.propTypes = {
-  id: PropTypes.number.isRequired,
-  Image: PropTypes.string,
-  Character: PropTypes.string.isRequired,
-  Name: PropTypes.string.isRequired,
-};
+
 
 export default CastProfile;
