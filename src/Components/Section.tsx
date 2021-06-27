@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -77,22 +76,26 @@ const Title = styled.div`
   font-weight: 700;
 `;
 
-const Section = ({ title, children, recommend }) => {
+type MainSection_Type = {
+  title : string;
+  children : JSX.Element;
+}
+
+function Section({ title, children }: MainSection_Type) {
   return (
     <Container>
       <Title>{title}</Title>
-
       <Slider {...settings}>{children}</Slider>
     </Container>
   );
 };
 
-Section.prototype = {
-  title: PropTypes.string.isRequired,
+/* Section.prototype = {
+  title: PropTypes.string.isRequired, //필수값
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
-};
+}; */
 
 export default Section;

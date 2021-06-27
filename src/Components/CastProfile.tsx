@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -16,7 +16,7 @@ const Container = styled.div`
 
 const ImageContainer = styled.div``;
 
-const Image = styled.div`
+const Image = styled.div<{bgUrl : string}>`
   margin: 0 10px;
   width: 100px;
   height: 100px;
@@ -53,7 +53,7 @@ type GreetingsProps = {
   origin_country: string;
 };
 
-const CastProfile: React.FC<GreetingsProps> = ({ id, char, name, imgUrl, origin_country }) => {
+function CastProfile({ id, char, name, imgUrl, origin_country }: GreetingsProps) {
   return (
     <Link to={`/person/${id}/`}>
       <Container>

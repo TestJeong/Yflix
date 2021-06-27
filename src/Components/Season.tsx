@@ -28,7 +28,14 @@ const Count = styled.div`
   margin-bottom: 3px;
 `;
 
-const Seasons = ({ imgUrl, name, episode_count }) => {
+type GreetingsProps = {
+  imgUrl: string;
+  name: string;
+  episode_count: string;
+};
+
+
+function Seasons({ imgUrl, name, episode_count }: GreetingsProps) {
   return (
     <Container>
       <ImageContainer>
@@ -38,6 +45,6 @@ const Seasons = ({ imgUrl, name, episode_count }) => {
       <Count>총 {episode_count}화</Count>
     </Container>
   );
-};
+}
 
 export default Seasons;
