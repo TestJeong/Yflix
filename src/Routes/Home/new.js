@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 import Section from "Components/Section";
@@ -7,11 +7,11 @@ import Loader from "Components/Loader";
 import Message from "Components/Message";
 import Poster from "Components/Poster";
 import MovieMainSlider from "../../Components/MovieMainSlider";
-import { movieApi } from "api";
+import {movieApi} from 'api'
 
 const Container = styled.div``;
 
-const HomeContainer = () => {
+const HomePresenter = () => {
   const [nowPlaying, setnowPlaying] = useState(null);
   const [popular, setpopular] = useState(null);
   const [upcoming, setupcoming] = useState(null);
@@ -19,37 +19,34 @@ const HomeContainer = () => {
   const [error, seterror] = useState(null);
   const [movieTrending, setmovieTrending] = useState(null);
 
-  const fetchArticles = async () => {
+  useEffect(() => {
     try {
       const {
         data: { results: movieTrending },
-      } = await movieApi.movieTrending();
+      } =  movieApi.movieTrending();
 
       const {
         data: { results: nowPlaying },
-      } = await movieApi.nowPlaying();
+      } =  movieApi.nowPlaying();
 
       const {
         data: { results: upcoming },
-      } = await movieApi.upcoming();
+      } =  movieApi.upcoming();
 
       const {
         data: { results: popular }, //변수명 변경방법
-      } = await movieApi.popular();
+      } =  movieApi.popular();
+    
+    setnowPlaying(nowPlaying)
+    setpopular(popular)
+    setupcoming(upcoming)
+    setmovieTrending(movieTrending)
 
-      setnowPlaying(nowPlaying);
-      setpopular(popular);
-      setupcoming(upcoming);
-      setmovieTrending(movieTrending);
     } catch {
       seterror("Can't find movies information.");
     } finally {
       setloading(false);
     }
-  };
-
-  useEffect(() => {
-    fetchArticles();
   }, []);
 
   return (
@@ -64,7 +61,6 @@ const HomeContainer = () => {
           <Helmet>
             <title>Movies | Nomflix</title>
           </Helmet>
-
           <MovieMainSlider movieTrending={movieTrending} />
           {nowPlaying && nowPlaying.length > 0 && (
             <Section title={"현재 상영"}>
@@ -119,7 +115,16 @@ const HomeContainer = () => {
   );
 };
 
+HomePresenter.propTypes = {
+  nowPlaying: PropTypes.array,
+  popular: PropTypes.array,
+  upcomfing: PropTypes.array,
+  movieTrending: PropTypes.array,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+};
+
+export default HomePresenter;
+
 // 논리연산자 &&(and)는 두가지 모두 true 일때만 true를 출력한다 여러개를 쓸 경우 왼쪽부터 오른쪽으로 간다
 // subtring은 자르는 기능 (0,4) 0번째에서 4번째가지 자른다
-
-export default HomeContainer;

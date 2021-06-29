@@ -92,7 +92,7 @@ function Section({ title, children }: MainSection_Type) {
 
 /* Section.prototype = {
   title: PropTypes.string.isRequired, //필수값
-  children: PropTypes.oneOfType([
+  children: PropType    s.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
