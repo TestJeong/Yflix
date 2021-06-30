@@ -36,6 +36,8 @@ type GreetingsProps = {
 
 
 function Seasons({ imgUrl, name, episode_count }: GreetingsProps) {
+
+
   return (
     <Container>
       <ImageContainer>

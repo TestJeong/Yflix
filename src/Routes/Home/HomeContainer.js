@@ -19,36 +19,36 @@ const HomeContainer = () => {
   const [error, seterror] = useState(null);
   const [movieTrending, setmovieTrending] = useState(null);
 
-  const fetchArticles = async () => {
-    try {
-      const {
-        data: { results: movieTrending },
-      } = await movieApi.movieTrending();
-
-      const {
-        data: { results: nowPlaying },
-      } = await movieApi.nowPlaying();
-
-      const {
-        data: { results: upcoming },
-      } = await movieApi.upcoming();
-
-      const {
-        data: { results: popular }, //변수명 변경방법
-      } = await movieApi.popular();
-
-      setnowPlaying(nowPlaying);
-      setpopular(popular);
-      setupcoming(upcoming);
-      setmovieTrending(movieTrending);
-    } catch {
-      seterror("Can't find movies information.");
-    } finally {
-      setloading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const {
+          data: { results: movieTrending },
+        } = await movieApi.movieTrending();
+
+        const {
+          data: { results: nowPlaying },
+        } = await movieApi.nowPlaying();
+
+        const {
+          data: { results: upcoming },
+        } = await movieApi.upcoming();
+
+        const {
+          data: { results: popular }, //변수명 변경방법
+        } = await movieApi.popular();
+
+        setnowPlaying(nowPlaying);
+        setpopular(popular);
+        setupcoming(upcoming);
+        setmovieTrending(movieTrending);
+      } catch {
+        seterror("Can't find movies information.");
+      } finally {
+        setloading(false);
+      }
+    };
+
     fetchArticles();
   }, []);
 
@@ -65,7 +65,9 @@ const HomeContainer = () => {
             <title>Movies | Nomflix</title>
           </Helmet>
 
-          <MovieMainSlider movieTrending={movieTrending} />
+          {movieTrending && movieTrending.length > 0 && (
+            <MovieMainSlider movieTrending={movieTrending} />
+          )}
           {nowPlaying && nowPlaying.length > 0 && (
             <Section title={"현재 상영"}>
               {nowPlaying.map((movie) => (
