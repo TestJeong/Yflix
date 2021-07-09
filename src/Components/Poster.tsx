@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -49,9 +48,19 @@ const Year = styled.span`
   color: rgba(255, 255, 255, 0.5);
 `;
 
-const Poster = ({ id, imageUrl, title, rating, year, isMovie }) => (
+type GreetingsProps = {
+  id: number;
+  imageUrl: string;
+  title: string;
+  rating: number;
+  year: string;
+  isMovie: boolean;
+  key: number;
+};
+
+const Poster = ({ id, imageUrl, title, rating, year, isMovie, key } : GreetingsProps) => (
   <Link to={isMovie ? `/movie/${id}` : `/tv/${id}`}>
-    <Container>
+    <Container key={key}>
       <ImageContainer>
         <Image
           src={imageUrl ? `https://image.tmdb.org/t/p/w500${imageUrl}` : "no"}
@@ -70,12 +79,4 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie }) => (
   </Link>
 );
 
-Poster.propTypes = {
-  id: PropTypes.number.isRequired,
-  imgUrl: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  rating: PropTypes.number,
-  year: PropTypes.string,
-  isMovie: PropTypes.bool.isRequired,
-};
 export default Poster;

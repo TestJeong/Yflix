@@ -1,15 +1,34 @@
 import React from "react";
-import Section from "../Components/Section";
-import Poster from "../Components/Poster";
+import Section from "./Section";
+import Poster from "./Poster";
 import { useEffect } from "react";
 
-const Recommend = ({ recommend, isMovie, urlId }) => {
+type RecommendProps ={
+  recommend : Array<PosterProps>
+  isMovie: boolean
+  urlId: number
+}
+
+type PosterProps = {
+  poster_path : string
+  title: string
+  name: string
+  id: number
+  isMovie: boolean
+  key: number
+  vote_average: number
+  release_date: string
+  first_air_date: string
+}
+
+const Recommend = ({ recommend, isMovie, urlId }: RecommendProps) => {
   useEffect(() => {
     window.scrollTo(0, 0);
+    console.log(recommend)
   }, [urlId]);
   return (
-    <Section title="추천 영상" recommend={recommend}>
-      {recommend.map((movie) => (
+    <Section title="추천 영상" >
+      {recommend.map((movie : PosterProps) => (
         <Poster
           imageUrl={movie.poster_path}
           title={isMovie ? movie.title : movie.name}

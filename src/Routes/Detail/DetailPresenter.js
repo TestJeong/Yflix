@@ -144,7 +144,7 @@ const DetailPresenter = ({
   isMovie,
   urlId,
 }) => {
-  console.log("res", result);
+  console.log("res", isMovie);
   return loading ? (
     <>
       <Helmet>

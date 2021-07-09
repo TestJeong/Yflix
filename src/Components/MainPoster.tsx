@@ -1,9 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
+ 
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const Backdrop = styled.div`
+const Backdrop = styled.div<{bgImage : string}>`
   width: 100%;
   height: calc(100vh - 70px);
   background-image: linear-gradient(to right, black, transparent),
@@ -42,10 +42,19 @@ const Button = styled.button`
   border: 0;
 `;
 
-const MainPoster = ({ imageUrl, title, isTV, overview, id }) => (
+type MainPosterProps ={
+  imageUrl: string
+  title: string
+  isTV: boolean
+  overview: string
+  id: number
+  key: number
+}
+
+const MainPoster = ({ imageUrl, title, isTV, overview, id, key } : MainPosterProps) => (
   <Conatiner>
     <Backdrop bgImage={`https://image.tmdb.org/t/p/original${imageUrl}`} />
-    <Content>
+    <Content key={key}>
       <Title>{title}</Title>
       <Overview>
         {overview.length > 300 ? overview.substring(0, 300) + "..." : overview}
@@ -57,12 +66,6 @@ const MainPoster = ({ imageUrl, title, isTV, overview, id }) => (
   </Conatiner>
 );
 
-MainPoster.propTypes = {
-  imageUrl: PropTypes.string,
-  title: PropTypes.string,
-  isTV: PropTypes.bool,
-  overview: PropTypes.string,
-  id: PropTypes.number,
-};
+
 
 export default MainPoster;

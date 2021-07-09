@@ -78,7 +78,7 @@ const Title = styled.div`
 
 type MainSection_Type = {
   title : string;
-  children : JSX.Element;
+  children : any;
 }
 
 function Section({ title, children }: MainSection_Type) {

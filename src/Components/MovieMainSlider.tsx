@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -12,27 +11,45 @@ const settings = {
   arrows: false,
 };
 
-const movieMainSlider = ({ movieTrending, tvTrending, isTV }) => {
+type MovieMainSliderProps = {
+  movieTrending: Array<TrendingProps>;
+  tvTrending: Array<TrendingProps>;
+  isTV: boolean;
+};
+
+type TrendingProps ={
+  backdrop_path : string
+  name: string
+  title: string
+  overview: string
+  id: number
+  key: number
+  
+}
+
+const movieMainSlider = ({ movieTrending, tvTrending, isTV }: MovieMainSliderProps) => {
   return isTV ? (
     <Slider {...settings}>
-      {tvTrending.map((tv) => (
+      {tvTrending.map((tv:TrendingProps) => (
         <MainPoster
           imageUrl={tv.backdrop_path}
           title={tv.name}
           overview={tv.overview}
           id={tv.id}
+          key={tv.id}
           isTV={isTV}
         />
       ))}
     </Slider>
   ) : (
     <Slider {...settings}>
-      {movieTrending.map((movie) => (
+      {movieTrending.map((movie: TrendingProps) => (
         <MainPoster
           imageUrl={movie.backdrop_path}
           title={movie.title}
           overview={movie.overview}
           id={movie.id}
+          key={movie.id}
           isTV={isTV}
         />
       ))}
@@ -40,10 +57,6 @@ const movieMainSlider = ({ movieTrending, tvTrending, isTV }) => {
   );
 };
 
-movieMainSlider.propTypes = {
-  movieTrending: PropTypes.array,
-  tvTrending: PropTypes.array,
-  isTV: PropTypes.bool,
-};
+
 
 export default movieMainSlider;

@@ -27,6 +27,7 @@ const HomeContainer = () => {
       movieApi.popular(),
     ])
       .then(([movieTrending, nowPlaying, upcoming, popular]) => {
+        console.log(movieTrending.value.data.results);
         setmovieTrending(movieTrending.value.data.results);
         setnowPlaying(nowPlaying.value.data.results);
         setupcoming(upcoming.value.data.results);
@@ -52,13 +53,13 @@ const HomeContainer = () => {
           {movieTrending && <MovieMainSlider movieTrending={movieTrending} />}
           {nowPlaying && (
             <Section title={"현재 상영"}>
-              {nowPlaying.map((movie) => (
+              {nowPlaying.map((movie, index) => (
                 <Poster
                   imageUrl={movie.poster_path}
                   title={movie.title}
                   id={movie.id}
                   isMovie={true}
-                  key={movie.key}
+                  key={index}
                   rating={movie.vote_average}
                   year={movie.release_date.substring(0, 4)}
                 />
@@ -68,13 +69,13 @@ const HomeContainer = () => {
 
           {upcoming && (
             <Section title="개봉 예정">
-              {upcoming.map((movie) => (
+              {upcoming.map((movie, index) => (
                 <Poster
                   imageUrl={movie.poster_path}
                   title={movie.title}
                   id={movie.id}
                   isMovie={true}
-                  key={movie.key}
+                  key={index}
                   rating={movie.vote_average}
                   year={movie.release_date.substring(0, 4)}
                 />
@@ -83,13 +84,13 @@ const HomeContainer = () => {
           )}
           {popular && (
             <Section title="인기 영화">
-              {popular.map((movie) => (
+              {popular.map((movie, index) => (
                 <Poster
                   imageUrl={movie.poster_path}
                   title={movie.title}
                   id={movie.id}
                   isMovie={true}
-                  key={movie.key}
+                  key={index}
                   rating={movie.vote_average}
                   year={movie.release_date}
                 />
