@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 
 const Header = styled.header`
   color: white;
@@ -20,7 +20,7 @@ const List = styled.ul`
   display: flex;
 `;
 
-const Item = styled.li`
+const Item = styled.li<{current: boolean}>`
   width: 80px;
   height: 50px;
   text-align: center;
@@ -38,20 +38,26 @@ const SLink = styled(Link)`
 
 ///////////////////////////////////////////////////////////////////////////
 
-export default withRouter(({ location: { pathname } }) => (
-  <Header>
+const Headers = ({ location}: RouteComponentProps) => {
+  return (
+    <Header>
     <List>
-      <Item current={pathname === "/"}>
+      <Item current={location.pathname === "/"}>
         <SLink to="/">Movies</SLink>
       </Item>
-      <Item current={pathname === "/tv"}>
+      <Item current={location.pathname === "/tv"}>
         <SLink to="/tv">TV</SLink>
       </Item>
-      <Item current={pathname === "/search"}>
+      <Item current={location.pathname === "/search"}>
         <SLink to="/search">Search</SLink>
       </Item>
     </List>
   </Header>
-));
+  )
+}
+
+export default withRouter(Headers)
+
+
 
 // Link는 a와 비슷한 개념으로 to를 통해 이동할 경로를 지정해준다
