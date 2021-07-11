@@ -24,7 +24,7 @@ type PosterProps = {
 const Recommend = ({ recommend, isMovie, urlId }: RecommendProps) => {
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.log(recommend)
+
   }, [urlId]);
   return (
     <Section title="추천 영상" >

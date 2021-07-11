@@ -2,22 +2,22 @@ import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
-import Section from "Components/Section";
-import Loader from "Components/Loader";
-import Message from "Components/Message";
-import Poster from "Components/Poster";
+import Section from '../../Components/Section'
+import Loader from "../../Components/Loader";
+import Message from "../../Components/Message";
+import Poster from "../../Components/Poster";
 import MovieMainSlider from "../../Components/MovieMainSlider";
-import { movieApi } from "api";
+import { movieApi } from "../../api";
 
 const Container = styled.div``;
 
 const HomeContainer = () => {
-  const [nowPlaying, setnowPlaying] = useState(null);
-  const [popular, setpopular] = useState(null);
-  const [upcoming, setupcoming] = useState(null);
-  const [loading, setloading] = useState(null);
-  const [error, seterror] = useState(null);
-  const [movieTrending, setmovieTrending] = useState(null);
+  const [nowPlaying, setnowPlaying] = useState<string>("");
+  const [popular, setpopular] = useState<string>("");
+  const [upcoming, setupcoming] = useState<string>("");
+  const [loading, setloading] = useState<boolean>(true);
+  const [error, seterror] = useState<string>("");
+  const [movieTrending, setmovieTrending] = useState<string>("");
 
   useEffect(() => {
     Promise.allSettled([
@@ -27,7 +27,7 @@ const HomeContainer = () => {
       movieApi.popular(),
     ])
       .then(([movieTrending, nowPlaying, upcoming, popular]) => {
-        console.log(movieTrending.value.data.results);
+  
         setmovieTrending(movieTrending.value.data.results);
         setnowPlaying(nowPlaying.value.data.results);
         setupcoming(upcoming.value.data.results);

@@ -19,7 +19,6 @@ const TVPresenter = () => {
   const [loading, setloading] = useState(null);
   const [error, seterror] = useState(null);
   const [tvTrending, settvTrending] = useState(null);
-  const [isTV, setisTV] = useState(null);
 
   const location = useLocation();
 
@@ -29,19 +28,15 @@ const TVPresenter = () => {
       tvApi.popular(),
       tvApi.airingToday(),
       tvApi.tvTrending(),
-      location,
     ])
       .then(([topRated, popular, airingToday, tvTrending]) => {
         settopRated(topRated.value.data.results);
         setpopular(popular.value.data.results);
         setairingToday(airingToday.value.data.results);
         settvTrending(tvTrending.value.data.results);
-
-        setisTV(location.pathname.includes("/tv"));
       })
       .catch((_) => seterror("Can't find movies information."))
       .finally((_) => setloading(false));
-    console.log(isTV);
   }, []);
 
   return loading ? (
@@ -51,7 +46,12 @@ const TVPresenter = () => {
       <Helmet>
         <title>Show | Nomflix</title>
       </Helmet>
-      {tvTrending && <MovieMainSlider tvTrending={tvTrending} isTV={true} />}
+      {tvTrending && (
+        <MovieMainSlider
+          tvTrending={tvTrending}
+          isTV={location.pathname.includes("/tv")}
+        />
+      )}
       {topRated && topRated.length > 0 && (
         <Section title="최고 평점 TV">
           {topRated.map((show) => (
