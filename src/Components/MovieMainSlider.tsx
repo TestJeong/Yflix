@@ -11,13 +11,13 @@ const settings = {
   arrows: false,
 };
 
-type MovieMainSliderProps = {
+export type MovieMainSliderProps = {
   movieTrending: Array<TrendingProps>;
   tvTrending: Array<TrendingProps>;
   isTV: boolean;
 };
 
-type TrendingProps ={
+export type TrendingProps ={
   backdrop_path : string
   name: string
   title: string
